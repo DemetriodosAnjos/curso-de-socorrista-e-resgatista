@@ -90,13 +90,16 @@ function carregarMateria(id) {
 
 // 6. Função responsável por GERAR E BAIXAR o PDF com Feedback
 async function baixarPDF() {
-  const elemento = document.getElementById("content-article");
-  if (!elemento) {
+  const elementoOriginal = document.getElementById("content-article");
+  const containerScroll =
+    document.querySelector(".content-area") || document.body;
+
+  if (!elementoOriginal) {
     alert("Erro: Elemento de conteúdo não encontrado.");
     return;
   }
 
-  // 1. Cria e exibe o Overlay de Loading no DOM
+  // 1. Exibe o Overlay de Loading
   const overlay = document.createElement("div");
   overlay.className = "pdf-loading-overlay";
 
@@ -108,44 +111,64 @@ async function baixarPDF() {
 
   const mensagem = document.createElement("p");
   mensagem.className = "pdf-loading-text";
-  mensagem.textContent = "Carregando download...";
+  mensagem.textContent = "Gerando PDF...";
 
   card.appendChild(spinner);
   card.appendChild(mensagem);
   overlay.appendChild(card);
   document.body.appendChild(overlay);
 
-  const titulomateria = materiaAtiva?.titulo || "materia";
-
-  const nomeArquivo =
-    titulomateria
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/\s+/g, "-") + ".pdf";
-
-  const opcoes = {
-    margin: [10, 10, 18, 10],
-    filename: nomeArquivo,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      logging: false,
-      scrollX: 0,
-      scrollY: 0,
-    },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    // Configuração para evitar quebra de imagens, SVGs e containers de mídias
-    pagebreak: {
-      mode: ["css", "legacy"],
-      avoid: ["img", "svg", ".infografico-container", "tr"],
-    },
-  };
+  // Guardamos as propriedades originais de estilo para restaurar depois
+  const estiloOriginalContainer = containerScroll.style.overflow;
+  const estiloOriginalElemento = elementoOriginal.style.height;
 
   try {
-    const worker = html2pdf().set(opcoes).from(elemento);
+    // 2. Destrava temporariamente os limites da área para o html2canvas ler a altura real total
+    containerScroll.style.overflow = "visible";
+    elementoOriginal.style.height = "auto";
+
+    // Aguarda um ciclo de renderização do DOM
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    const titulomateria = materiaAtiva?.titulo || "materia";
+    const nomeArquivo =
+      titulomateria
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/\s+/g, "-") + ".pdf";
+
+    // 3. Opções ajustadas diretamente no elemento real
+    const opcoes = {
+      margin: [12, 10, 18, 10], // [Topo, Esquerda, Baixo, Direita] em mm
+      filename: nomeArquivo,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        scrollY: -window.scrollY,
+        scrollX: 0,
+        windowWidth: document.documentElement.offsetWidth,
+      },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: {
+        mode: ["avoid-all", "css"], // Força a biblioteca a empurrar elementos para a próxima página em vez de fatiar
+        avoid: [
+          "img",
+          "svg",
+          "figure",
+          ".infografico-container",
+          "p",
+          "li",
+          "h2",
+          "h3",
+        ],
+      },
+    };
+
+    const worker = html2pdf().set(opcoes).from(elementoOriginal);
 
     await worker.toContainer().toCanvas().toPdf();
 
@@ -183,24 +206,25 @@ async function baixarPDF() {
       }
     }
 
-    // Dispara o download do arquivo com rodapé aplicado
     await worker.save();
 
-    // 2. Sucesso: Esconde o spinner e altera a mensagem
+    // Feedback de Sucesso
     spinner.style.display = "none";
     mensagem.textContent = "Download concluído!";
 
-    // 3. Remove a mensagem da tela após 1.5 segundos
     setTimeout(() => {
       overlay.remove();
-    }, 1500);
+    }, 1200);
   } catch (erro) {
     console.error("Falha detalhada ao gerar o PDF:", erro);
-    alert("Ocorreu um erro ao gerar o PDF. Verifique o console do navegador.");
+    alert("Ocorreu um erro ao gerar o PDF. Verifique o console.");
     overlay.remove();
+  } finally {
+    // 4. Restaura os estilos originais da tela imediatamente
+    containerScroll.style.overflow = estiloOriginalContainer;
+    elementoOriginal.style.height = estiloOriginalElemento;
   }
 }
-
 // 7. Evento do Botão de Download (escopo global do módulo)
 if (downloadLink) {
   downloadLink.addEventListener("click", (e) => {

@@ -269,6 +269,51 @@ body {
   animation: pdf-spin 0.8s linear infinite;
 }
 
+/* Regras seguras para imagens e elementos de mídia
+#content-article img,
+#content-article svg,
+#content-article figure {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}*/
+
+/* ==========================================================
+   CONTROLE DE QUEBRA DE PÁGINA PARA O PDF
+   ========================================================== */
+
+/* Impede que imagens, SVGs e containers visuais sejam cortados ao meio */
+#content-article img,
+#content-article svg,
+#content-article figure,
+.infografico-container {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+  break-inside: avoid-page !important;
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Impede que parágrafos, itens de lista e títulos sejam fatiados */
+#content-article p,
+#content-article li,
+#content-article h2,
+#content-article h3,
+#content-article h4 {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+  break-inside: avoid-page !important;
+}
+
+/* Força os títulos a ficarem sempre grudados no parágrafo seguinte */
+#content-article h2,
+#content-article h3,
+#content-article h4 {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+}
+
 @keyframes pdf-spin {
   to {
     transform: rotate(360deg);
