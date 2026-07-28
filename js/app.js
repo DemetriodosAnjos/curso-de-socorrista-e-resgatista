@@ -118,17 +118,29 @@ async function baixarPDF() {
   overlay.appendChild(card);
   document.body.appendChild(overlay);
 
-  // Guardamos as propriedades originais de estilo para restaurar depois
+  // Guardamos as propriedades originais para restaurar depois
   const estiloOriginalContainer = containerScroll.style.overflow;
   const estiloOriginalElemento = elementoOriginal.style.height;
+  const posicaoScrollOriginal = window.scrollY;
+
+  // Detecta se é um dispositivo móvel
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    ) || window.innerWidth < 768;
 
   try {
-    // 2. Destrava temporariamente os limites da área para o html2canvas ler a altura real total
+    // 2. Ajuste fino de exibição para leitura total
     containerScroll.style.overflow = "visible";
     elementoOriginal.style.height = "auto";
 
-    // Aguarda um ciclo de renderização do DOM
-    await new Promise((resolve) => setTimeout(resolve, 150));
+    // No mobile, força a rolar pro topo real para evitar o bug de offset de scroll do Android
+    if (isMobile) {
+      window.scrollTo(0, 0);
+    }
+
+    // Aguarda o ciclo de renderização do browser
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     const titulomateria = materiaAtiva?.titulo || "materia";
     const nomeArquivo =
@@ -138,9 +150,9 @@ async function baixarPDF() {
         .toLowerCase()
         .replace(/\s+/g, "-") + ".pdf";
 
-    // 3. Opções ajustadas diretamente no elemento real
+    // 3. Opções dinâmicas: Desktop mantém a lógica original intacta, Mobile ganha travas específicas
     const opcoes = {
-      margin: [12, 10, 18, 10], // [Topo, Esquerda, Baixo, Direita] em mm
+      margin: [10, 10, 12, 10], // [Topo, Esquerda, Baixo, Direita] - Margem inferior reduzida para dar respiro ao texto
       filename: nomeArquivo,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: {
@@ -148,13 +160,13 @@ async function baixarPDF() {
         useCORS: true,
         allowTaint: true,
         logging: false,
-        scrollY: -window.scrollY,
+        scrollY: isMobile ? 0 : -window.scrollY,
         scrollX: 0,
-        windowWidth: document.documentElement.offsetWidth,
+        windowWidth: isMobile ? 768 : document.documentElement.offsetWidth,
       },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       pagebreak: {
-        mode: ["avoid-all", "css"], // Força a biblioteca a empurrar elementos para a próxima página em vez de fatiar
+        mode: ["avoid-all", "css"],
         avoid: [
           "img",
           "svg",
@@ -164,6 +176,7 @@ async function baixarPDF() {
           "li",
           "h2",
           "h3",
+          "blockquote",
         ],
       },
     };
@@ -220,11 +233,16 @@ async function baixarPDF() {
     alert("Ocorreu um erro ao gerar o PDF. Verifique o console.");
     overlay.remove();
   } finally {
-    // 4. Restaura os estilos originais da tela imediatamente
+    // 4. Restauração imediata do DOM e do Scroll original
     containerScroll.style.overflow = estiloOriginalContainer;
     elementoOriginal.style.height = estiloOriginalElemento;
+
+    if (isMobile) {
+      window.scrollTo(0, posicaoScrollOriginal);
+    }
   }
 }
+
 // 7. Evento do Botão de Download (escopo global do módulo)
 if (downloadLink) {
   downloadLink.addEventListener("click", (e) => {
