@@ -10,11 +10,30 @@
   <body>
     <header class="main-header">
       <h1>UNITEC - Socorrista Resgatista</h1>
+      <!-- Botão Hambúrguer (pode colocar no seu Header ou logo no topo do Container) -->
+      <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
+
+    <!-- Overlay para escurecer o fundo quando a sidebar abrir -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
     <div class="container">
       <nav class="sidebar" id="sidebar-menu">
-        <h2>Matérias</h2>
+        <!-- Opcional: botão de fechar dentro do menu mobile -->
+        <div class="sidebar-header">
+          <h2>Matérias</h2>
+          <button
+            id="close-sidebar-btn"
+            class="close-sidebar-btn"
+            aria-label="Fechar menu"
+          >
+            &times;
+          </button>
+        </div>
         <ul id="menu-list"></ul>
       </nav>
 

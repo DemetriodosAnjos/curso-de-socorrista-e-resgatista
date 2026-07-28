@@ -1,23 +1,73 @@
-// 1. Importações dos arquivos de conteúdo
+/* ==========================================================
+   1. IMPORTAÇÕES DE MÓDULOS DE CONTEÚDO
+   ========================================================== */
 import { anatomiaHumanaBasica } from "./modulos/anatomia-humana-basica.js";
 import { abordagemPrimaria } from "./modulos/abordagem-primaria.js";
 
-// 2. Agrupador central de dados
+/* ==========================================================
+      2. AGRUPADOR CENTRAL DE DADOS
+      ========================================================== */
 const materiasData = {
   "anatomia-humana-basica": anatomiaHumanaBasica,
   "abordagem-primaria": abordagemPrimaria,
 };
 
-// 3. Seleção de elementos do DOM
+/* ==========================================================
+      3. SELEÇÃO DE ELEMENTOS DO DOM
+      ========================================================== */
+// Elementos de Navegação e Menu
 const menuList = document.getElementById("menu-list");
+const sidebar = document.getElementById("sidebar-menu");
+const hamburgerBtn = document.getElementById("hamburger-btn");
+const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+const overlaySidebar = document.getElementById("sidebar-overlay");
+
+// Elementos de Conteúdo Principal
 const contentTitle = document.getElementById("content-title");
 const contentBody = document.getElementById("content-body");
+
+// Botões de Ação
 const downloadLink = document.getElementById("download-link");
 const shareBtn = document.getElementById("share-btn");
 
+// Estado Global da Aplicação
 let materiaAtiva = null;
 
-// 4. Gerar Menu Lateral dinamicamente
+/* ==========================================================
+      4. CONTROLE DO MENU RESPONSIVO (HAMBÚRGUER / GAVETA MOBILE)
+      ========================================================== */
+
+/**
+ * Abre a sidebar no mobile e ativa a camada de esmaecimento do fundo
+ */
+function abrirSidebar() {
+  if (sidebar) sidebar.classList.add("active");
+  if (overlaySidebar) overlaySidebar.classList.add("active");
+}
+
+/**
+ * Fecha a sidebar no mobile e remove o esmaecimento do fundo
+ */
+function fecharSidebar() {
+  if (sidebar) sidebar.classList.remove("active");
+  if (overlaySidebar) overlaySidebar.classList.remove("active");
+}
+
+// Event Listeners para acionamento do Menu Hambúrguer e Overlay
+if (hamburgerBtn) hamburgerBtn.addEventListener("click", abrirSidebar);
+if (closeSidebarBtn) closeSidebarBtn.addEventListener("click", fecharSidebar);
+if (overlaySidebar) overlaySidebar.addEventListener("click", fecharSidebar);
+
+// Tecla ESC fecha o menu mobile se estiver aberto
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && sidebar?.classList.contains("active")) {
+    fecharSidebar();
+  }
+});
+
+/* ==========================================================
+      5. RENDERIZAÇÃO DO MENU LATERAL DINÂMICO
+      ========================================================== */
 if (menuList) {
   menuList.innerHTML = "";
 
@@ -29,13 +79,24 @@ if (menuList) {
     const button = document.createElement("button");
     button.textContent = materia.titulo || key;
     button.classList.add("menu-item-btn");
-    button.addEventListener("click", () => carregarMateria(key));
+
+    button.addEventListener("click", () => {
+      carregarMateria(key);
+
+      // Fecha a gaveta no mobile após selecionar uma matéria
+      if (window.innerWidth <= 1024) {
+        fecharSidebar();
+      }
+    });
+
     li.appendChild(button);
     menuList.appendChild(li);
   });
 }
 
-// 5. Carregar Conteúdo na Tela
+/* ==========================================================
+      6. CARREGAMENTO DE CONTEÚDO NA TELA
+      ========================================================== */
 function carregarMateria(id) {
   const materia = materiasData[id];
   if (!materia) return;
@@ -48,28 +109,28 @@ function carregarMateria(id) {
   const professorInfo = materia.professores || "Não informado";
 
   const blocoCabecalhoETitulo = `
-    <!-- 1. Cabeçalho Institucional -->
-    <div class="pdf-header" style="border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 15px;">
-      <h3 style="margin: 0; font-size: 1.1rem; color: #222; font-weight: 700;">
-        UNITEC - Curso para Socorristas e Resgatistas 2026
-      </h3>
-      <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #666;">
-        <strong>Turma:</strong> ${turmaInfo} &nbsp;|&nbsp; 
-        <strong>Professor:</strong> ${professorInfo}
-      </p>
-    </div>
-
-    <!-- 2. Título Principal da Matéria -->
-    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">
-      ${materia.titulo}
-    </h2>
-  `;
+       <!-- Cabeçalho Institucional para Leitura e PDF -->
+       <div class="pdf-header" style="border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 15px;">
+         <h3 style="margin: 0; font-size: 1.1rem; color: #222; font-weight: 700;">
+           UNITEC - Curso para Socorristas e Resgatistas 2026
+         </h3>
+         <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #666;">
+           <strong>Turma:</strong> ${turmaInfo} &nbsp;|&nbsp; 
+           <strong>Professor:</strong> ${professorInfo}
+         </p>
+       </div>
+   
+       <!-- Título Principal da Matéria -->
+       <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">
+         ${materia.titulo}
+       </h2>
+     `;
 
   if (contentBody) {
     contentBody.innerHTML = blocoCabecalhoETitulo + (materia.corpo || "");
   }
 
-  // Revelar botões de ação
+  // Revelar botões de ação após carregar o conteúdo
   if (downloadLink) {
     downloadLink.removeAttribute("hidden");
     downloadLink.style.display = "inline-flex";
@@ -80,7 +141,7 @@ function carregarMateria(id) {
     shareBtn.style.display = "inline-flex";
   }
 
-  // Atualizar URL
+  // Atualizar a URL com a matéria ativa sem recarregar a página
   window.history.pushState(
     null,
     materia.titulo,
@@ -88,7 +149,9 @@ function carregarMateria(id) {
   );
 }
 
-// 6. Função responsável por GERAR E BAIXAR o PDF com Feedback
+/* ==========================================================
+      7. GERAÇÃO DE PDF E DOWNLOAD (SUPORTE MULTI-DEVICE)
+      ========================================================== */
 async function baixarPDF() {
   const elementoOriginal = document.getElementById("content-article");
   const containerScroll =
@@ -99,7 +162,7 @@ async function baixarPDF() {
     return;
   }
 
-  // 1. Exibe o Overlay de Loading
+  // 1. Cria e exibe o Overlay de Carregamento
   const overlay = document.createElement("div");
   overlay.className = "pdf-loading-overlay";
 
@@ -118,28 +181,27 @@ async function baixarPDF() {
   overlay.appendChild(card);
   document.body.appendChild(overlay);
 
-  // Guardamos as propriedades originais para restaurar depois
+  // Armazena estilos originais para restauração pós-processamento
   const estiloOriginalContainer = containerScroll.style.overflow;
   const estiloOriginalElemento = elementoOriginal.style.height;
   const posicaoScrollOriginal = window.scrollY;
 
-  // Detecta se é um dispositivo móvel
+  // Checa se o acesso é mobile para travar offset de scroll
   const isMobile =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
     ) || window.innerWidth < 768;
 
   try {
-    // 2. Ajuste fino de exibição para leitura total
+    // Liberar limites de overflow para que o html2canvas meça a altura real total
     containerScroll.style.overflow = "visible";
     elementoOriginal.style.height = "auto";
 
-    // No mobile, força a rolar pro topo real para evitar o bug de offset de scroll do Android
     if (isMobile) {
       window.scrollTo(0, 0);
     }
 
-    // Aguarda o ciclo de renderização do browser
+    // Delay para garantir renderização do DOM
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     const titulomateria = materiaAtiva?.titulo || "materia";
@@ -150,9 +212,9 @@ async function baixarPDF() {
         .toLowerCase()
         .replace(/\s+/g, "-") + ".pdf";
 
-    // 3. Opções dinâmicas: Desktop mantém a lógica original intacta, Mobile ganha travas específicas
+    // Configurações do html2pdf.js
     const opcoes = {
-      margin: [10, 10, 12, 10], // [Topo, Esquerda, Baixo, Direita] - Margem inferior reduzida para dar respiro ao texto
+      margin: [10, 10, 12, 10], // Topo, Esquerda, Baixo, Direita (mm)
       filename: nomeArquivo,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: {
@@ -182,11 +244,11 @@ async function baixarPDF() {
     };
 
     const worker = html2pdf().set(opcoes).from(elementoOriginal);
-
     await worker.toContainer().toCanvas().toPdf();
 
     const pdf = await worker.get("pdf");
 
+    // Injeção de Rodapé e Paginação via jsPDF
     if (pdf) {
       const totalPaginas = pdf.internal.getNumberOfPages();
 
@@ -198,18 +260,18 @@ async function baixarPDF() {
         const larguraPagina = pdf.internal.pageSize.getWidth();
         const alturaPagina = pdf.internal.pageSize.getHeight();
 
-        // Linha do Rodapé
+        // Linha Divisória do Rodapé
         pdf.setDrawColor(200, 200, 200);
         pdf.line(10, alturaPagina - 12, larguraPagina - 10, alturaPagina - 12);
 
-        // Texto do Rodapé
+        // Texto do Rodapé Esquerdo
         pdf.text(
           "Todos os Direitos Reservados | Criado por: Demetrio dos Anjos",
           10,
           alturaPagina - 7,
         );
 
-        // Numeração de Páginas
+        // Numeração da Página no Canto Direito
         pdf.text(
           `Página ${i} de ${totalPaginas}`,
           larguraPagina - 10,
@@ -221,7 +283,7 @@ async function baixarPDF() {
 
     await worker.save();
 
-    // Feedback de Sucesso
+    // Feedback visual de término
     spinner.style.display = "none";
     mensagem.textContent = "Download concluído!";
 
@@ -233,7 +295,7 @@ async function baixarPDF() {
     alert("Ocorreu um erro ao gerar o PDF. Verifique o console.");
     overlay.remove();
   } finally {
-    // 4. Restauração imediata do DOM e do Scroll original
+    // Restauração das propriedades de tela e rolagem
     containerScroll.style.overflow = estiloOriginalContainer;
     elementoOriginal.style.height = estiloOriginalElemento;
 
@@ -243,7 +305,9 @@ async function baixarPDF() {
   }
 }
 
-// 7. Evento do Botão de Download (escopo global do módulo)
+/* ==========================================================
+      8. EVENTOS DOS BOTÕES DE AÇÃO (DOWNLOAD E COMPARTILHAR)
+      ========================================================== */
 if (downloadLink) {
   downloadLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -257,7 +321,6 @@ if (downloadLink) {
   });
 }
 
-// 8. Compartilhamento Nativo
 shareBtn?.addEventListener("click", async () => {
   if (!materiaAtiva) return;
 
@@ -277,9 +340,12 @@ shareBtn?.addEventListener("click", async () => {
   }
 });
 
-// 9. Verificar rota de URL ao carregar a página
+/* ==========================================================
+      9. VERIFICAÇÃO DE ROTA INICIAL (QUERY PARAMETER 'materia')
+      ========================================================== */
 const urlParams = new URLSearchParams(window.location.search);
 const materiaParam = urlParams.get("materia");
+
 if (materiaParam) {
   const keyEncontrada = Object.keys(materiasData).find(
     (key) => materiasData[key]?.slug === materiaParam || key === materiaParam,

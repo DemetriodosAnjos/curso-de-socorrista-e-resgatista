@@ -1,3 +1,6 @@
+/* ==========================================================
+   1. VARIÁVEIS E RESET
+   ========================================================== */
 :root {
   --primary-color: #d32f2f;
   --text-color: #333;
@@ -12,7 +15,7 @@
   padding: 0;
 }
 
-/* O body trava a altura em 100% da viewport e vira um container flex */
+/* Trava a altura em 100% da viewport */
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
@@ -23,38 +26,54 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* NUNCA rola o body */
+  overflow: hidden; /* Mantém o layout de app (sem scroll no body em desktop) */
 }
 
-/* Header simples, sem necessidade de sticky pois a página não rola */
+/* ==========================================================
+     2. HEADER E LAYOUT PRINCIPAL
+     ========================================================== */
 .main-header {
   background-color: var(--primary-color);
   color: #fff;
-  padding: 1.5rem;
-  text-align: center;
-  flex-shrink: 0; /* Impede o header de encolher */
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
-/* Container ocupa AUTOMATICAMENTE todo o espaço vertical restante */
+.main-header h1 {
+  font-size: 1.5rem;
+}
+
 .container {
   display: grid;
   grid-template-columns: 300px 1fr;
-  flex: 1; /* Ocupa 100% da altura que sobrou abaixo do header */
+  flex: 1;
   overflow: hidden;
 }
 
-/* Sidebar estática com rolagem própria se o menu for grande */
+/* ==========================================================
+     3. SIDEBAR / MENU LATERAL (BASE DESKTOP)
+     ========================================================== */
 .sidebar {
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--border-color);
   padding: 1.5rem;
   height: 100%;
   overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .sidebar h2 {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
   color: #555;
 }
 
@@ -72,7 +91,9 @@ body {
   cursor: pointer;
   border-radius: 4px;
   font-size: 1rem;
-  transition: background 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .menu-item-btn:hover {
@@ -80,7 +101,16 @@ body {
   color: var(--primary-color);
 }
 
-/* Área de Conteúdo rola INDEPENDENTE */
+/* Escondidos por padrão no Desktop */
+.hamburger-btn,
+.close-sidebar-btn,
+.sidebar-overlay {
+  display: none;
+}
+
+/* ==========================================================
+     4. ÁREA DE CONTEÚDO
+     ========================================================== */
 .content-area {
   height: 100%;
   overflow-y: auto;
@@ -90,17 +120,17 @@ body {
   justify-content: space-between;
 }
 
+#content-article h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
 #content-body img {
   max-width: 100%;
   height: auto;
   margin-top: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#content-article h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
 }
 
 #content-body p {
@@ -140,20 +170,18 @@ body {
 }
 
 .btn-download {
-  border-radius: 4px; /* Opcional: ajuste o arredondamento dos cantos */
-  border: 2px solid #25d366; /* Espessura | Estilo | Cor */
+  border: 2px solid #25d366;
   color: #029237;
-  background-color: transparent; /* Garante que o fundo não cubra a área interna caso queira apenas o contorno */
+  background-color: transparent;
 }
 
 .btn-share {
-  border-radius: 4px; /* Opcional: ajuste o arredondamento dos cantos */
-  border: 2px solid #0288d1; /* Espessura | Estilo | Cor */
+  border: 2px solid #0288d1;
   color: #0288d1;
-  background-color: transparent; /* Garante que o fundo não cubra a área interna caso queira apenas o contorno */
+  background-color: transparent;
 }
 
-/* Footer Créditos e Contato */
+/* Footer / Créditos */
 .footer-credits {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -205,7 +233,6 @@ body {
   transition: all 0.2s ease;
 }
 
-/* Hover e Cores das Redes */
 .social-btn:hover {
   transform: translateY(-2px);
   color: #fff;
@@ -226,7 +253,9 @@ body {
   background-color: #25d366;
 }
 
-/* Container de bloqueio/loading */
+/* ==========================================================
+     5. COMPONENTES UTILITÁRIOS (PDF OVERLAY & SPINNER)
+     ========================================================== */
 .pdf-loading-overlay {
   position: fixed;
   top: 0;
@@ -240,7 +269,6 @@ body {
   z-index: 9999;
 }
 
-/* Card central com mensagem */
 .pdf-loading-card {
   background: #ffffff;
   padding: 24px 32px;
@@ -259,30 +287,24 @@ body {
   margin: 0;
 }
 
-/* Animação do Spinner */
 .pdf-spinner {
   width: 36px;
   height: 36px;
   border: 4px solid #e0e0e0;
-  border-top-color: #25d366; /* Cor verde para alinhar com a identidade */
+  border-top-color: #25d366;
   border-radius: 50%;
   animation: pdf-spin 0.8s linear infinite;
 }
 
-/* Regras seguras para imagens e elementos de mídia
-#content-article img,
-#content-article svg,
-#content-article figure {
-  max-width: 100% !important;
-  height: auto !important;
-  display: block;
-}*/
+@keyframes pdf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ==========================================================
-   CONTROLE DE QUEBRA DE PÁGINA PARA O PDF
-   ========================================================== */
-
-/* Impede que imagens, SVGs e containers visuais sejam cortados ao meio */
+     6. CONTROLE DE QUEBRA DE PÁGINA PARA O PDF
+     ========================================================== */
 #content-article img,
 #content-article svg,
 #content-article figure,
@@ -295,54 +317,123 @@ body {
   height: auto !important;
 }
 
-/* Impede que parágrafos, itens de lista e títulos sejam fatiados */
 #content-article p,
 #content-article li,
+#content-article blockquote {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+  break-inside: avoid-page !important;
+  orphans: 3 !important;
+  widows: 3 !important;
+  line-height: 1.5 !important;
+}
+
 #content-article h2,
 #content-article h3,
 #content-article h4 {
   page-break-inside: avoid !important;
   break-inside: avoid !important;
-  break-inside: avoid-page !important;
-}
-
-/* Força os títulos a ficarem sempre grudados no parágrafo seguinte */
-#content-article h2,
-#content-article h3,
-#content-article h4 {
   page-break-after: avoid !important;
   break-after: avoid !important;
 }
 
-@keyframes pdf-spin {
-  to {
-    transform: rotate(360deg);
+/* ==========================================================
+     7. RESPONSIVIDADE (MOBILE & TABLET - ATÉ 1024px)
+     ========================================================== */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  /* Botão Hambúrguer */
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 100;
+  }
+
+  .hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  /* Sidebar Gaveta Flutuante */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    border-right: none;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .close-sidebar-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+  }
+
+  /* Overlay de esmaecimento do fundo */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .content-area {
+    padding: 1.5rem;
   }
 }
 
-/* Ajuste Responsivo */
 @media (max-width: 600px) {
   .footer-credits {
     flex-direction: column;
     align-items: flex-start;
   }
-}
 
-/* Responsividade móvel */
-@media (max-width: 768px) {
-  body {
-    overflow: auto; /* Volta ao scroll padrão em telas pequenas */
+  .content-actions {
+    flex-direction: column;
   }
-  .container {
-    grid-template-columns: 1fr;
-    overflow: visible;
-  }
-  .sidebar {
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    height: auto;
-  }
-  .content-area {
-    height: auto;
+
+  .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
