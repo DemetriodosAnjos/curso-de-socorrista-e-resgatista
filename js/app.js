@@ -137,6 +137,11 @@ async function baixarPDF() {
       scrollY: 0,
     },
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    // Configuração para evitar quebra de imagens, SVGs e containers de mídias
+    pagebreak: {
+      mode: ["css", "legacy"],
+      avoid: ["img", "svg", ".infografico-container", "tr"],
+    },
   };
 
   try {
@@ -178,7 +183,7 @@ async function baixarPDF() {
       }
     }
 
-    // Dispara o download do arquivo
+    // Dispara o download do arquivo com rodapé aplicado
     await worker.save();
 
     // 2. Sucesso: Esconde o spinner e altera a mensagem
@@ -192,7 +197,7 @@ async function baixarPDF() {
   } catch (erro) {
     console.error("Falha detalhada ao gerar o PDF:", erro);
     alert("Ocorreu um erro ao gerar o PDF. Verifique o console do navegador.");
-    overlay.remove(); // Garante a remoção do modal em caso de falha
+    overlay.remove();
   }
 }
 
