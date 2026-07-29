@@ -2,7 +2,7 @@
    1. VARIÁVEIS E RESET
    ========================================================== */
 :root {
-  --primary-color: #d32f2f;
+  --primary-color: #0c3d6d;
   --text-color: #333;
   --bg-color: #f5f5f5;
   --sidebar-bg: #fff;
@@ -111,40 +111,64 @@ body {
 /* ==========================================================
      4. ÁREA DE CONTEÚDO
      ========================================================== */
+/* Container do Conteúdo */
 .content-area {
   height: 100%;
-  overflow-y: auto;
+  overflow-y: auto; /* Mantém a rolagem ativa na área inteira */
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 0; /* IMPRESCINDÍVEL para o Flexbox não travar o scroll interno em alguns browsers */
 }
 
+/* Título principal do artigo */
 #content-article h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
+/* Estilização e espaçamentos do corpo do conteúdo */
+#content-body {
+  flex: 1; /* Garante que o corpo ocupe o espaço extra antes dos botões de ação */
+}
+
 #content-body img {
   max-width: 100%;
   height: auto;
-  margin-top: 1rem;
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#content-body p {
+#content-body h1,
+#content-body h2 {
+  font-size: 1.75rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
-  font-size: 1.1rem;
+  color: #1a1a1a;
 }
 
 #content-body h3 {
   margin: 1.5rem 0 0.5rem 0;
 }
 
+#content-body p {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
 #content-body ul {
   margin-left: 1.5rem;
   margin-bottom: 1rem;
+}
+
+/* Espaçamento relativo quando uma imagem antecede um parágrafo */
+#content-body img + p {
+  margin-top: 1.5rem;
 }
 
 /* Botões de Ação */
@@ -169,16 +193,51 @@ body {
   border: none;
 }
 
+/* ==========================================================
+   ESTILOS BASE DOS BOTÕES
+   ========================================================== */
 .btn-download {
-  border: 2px solid #25d366;
-  color: #029237;
-  background-color: transparent;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color); /* Adicionado para igualar a altura dos dois botões */
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .btn-share {
-  border: 2px solid #0288d1;
-  color: #0288d1;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
   background-color: transparent;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* ==========================================================
+     HOVER DOS BOTÕES
+     ========================================================== */
+
+/* Botão Download: inverte as cores (ou escurece o fundo) ao passar o mouse */
+.btn-download:hover {
+  border: 2px solid #018dca;
+  background-color: #018dca;
+  color: #fff;
+}
+
+/* Botão Compartilhar: preenche o fundo ao passar o mouse */
+.btn-share:hover {
+  border: 2px solid #018dca;
+  background-color: transparent;
+  color: #018dca;
+}
+
+/* Efeito tátil opcional (clique/active) */
+.btn-download:active,
+.btn-share:active {
+  transform: translateY(1px);
 }
 
 /* Footer / Créditos */
