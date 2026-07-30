@@ -111,7 +111,6 @@ body {
 /* ==========================================================
      4. ÁREA DE CONTEÚDO
      ========================================================== */
-/* Container do Conteúdo */
 .content-area {
   height: 100%;
   overflow-y: auto; /* Mantém a rolagem ativa na área inteira */
@@ -119,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 0; /* IMPRESCINDÍVEL para o Flexbox não travar o scroll interno em alguns browsers */
+  min-height: 0; /* IMPRESCINDÍVEL para o Flexbox não travar o scroll interno */
 }
 
 /* Título principal do artigo */
@@ -130,7 +129,7 @@ body {
 
 /* Estilização e espaçamentos do corpo do conteúdo */
 #content-body {
-  flex: 1; /* Garante que o corpo ocupe o espaço extra antes dos botões de ação */
+  flex: 1; /* Ocupa o espaço extra antes dos botões de ação */
 }
 
 #content-body img {
@@ -148,11 +147,12 @@ body {
   font-size: 1.75rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #1a1a1a;
+  color: var(--primary-color);
 }
 
 #content-body h3 {
   margin: 1.5rem 0 0.5rem 0;
+  color: var(--primary-color);
 }
 
 #content-body p {
@@ -193,9 +193,6 @@ body {
   border: none;
 }
 
-/* ==========================================================
-   ESTILOS BASE DOS BOTÕES
-   ========================================================== */
 .btn-download {
   color: #fff;
   background-color: var(--primary-color);
@@ -216,25 +213,18 @@ body {
     transform 0.1s ease;
 }
 
-/* ==========================================================
-     HOVER DOS BOTÕES
-     ========================================================== */
-
-/* Botão Download: inverte as cores (ou escurece o fundo) ao passar o mouse */
 .btn-download:hover {
   border: 2px solid #018dca;
   background-color: #018dca;
   color: #fff;
 }
 
-/* Botão Compartilhar: preenche o fundo ao passar o mouse */
 .btn-share:hover {
   border: 2px solid #018dca;
   background-color: transparent;
   color: #018dca;
 }
 
-/* Efeito tátil opcional (clique/active) */
 .btn-download:active,
 .btn-share:active {
   transform: translateY(1px);
@@ -312,6 +302,21 @@ body {
   background-color: #25d366;
 }
 
+/* Botão Visualizar PDF (Provisório) */
+.btn-visualizar {
+  color: #333;
+  background-color: #e0e0e0;
+  border: 2px solid #ccc;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-visualizar:hover {
+  background-color: #d0d0d0;
+  border-color: #bbb;
+}
+
 /* ==========================================================
      5. COMPONENTES UTILITÁRIOS (PDF OVERLAY & SPINNER)
      ========================================================== */
@@ -364,36 +369,26 @@ body {
 /* ==========================================================
      6. CONTROLE DE QUEBRA DE PÁGINA PARA O PDF
      ========================================================== */
+.pdf-block,
 #content-article img,
-#content-article svg,
 #content-article figure,
-.infografico-container {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
-  break-inside: avoid-page !important;
-  display: block !important;
-  max-width: 100% !important;
-  height: auto !important;
-}
-
-#content-article p,
-#content-article li,
+#content-article table,
+#content-article tr,
+#content-article .tabela-doacao-container,
+#content-article .infografico-container,
 #content-article blockquote {
   page-break-inside: avoid !important;
   break-inside: avoid !important;
-  break-inside: avoid-page !important;
-  orphans: 3 !important;
-  widows: 3 !important;
-  line-height: 1.5 !important;
 }
 
+#content-article h1,
 #content-article h2,
 #content-article h3,
 #content-article h4 {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
   page-break-after: avoid !important;
   break-after: avoid !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
 }
 
 /* ==========================================================

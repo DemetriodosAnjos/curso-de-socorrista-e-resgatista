@@ -34,6 +34,136 @@ const shareBtn = document.getElementById("share-btn");
 let materiaAtiva = null;
 
 /* ==========================================================
+      FUNÇÃO VISUALIZAR PDF (PROVISORIA)
+      ========================================================== */
+async function visualizarPDF() {
+  const elementoOriginal = document.getElementById("content-article");
+  const containerScroll =
+    document.querySelector(".content-area") || document.body;
+
+  if (!elementoOriginal) {
+    alert("Erro: Elemento de conteúdo não encontrado.");
+    return;
+  }
+
+  // 1. Overlay de carregamento
+  const overlay = document.createElement("div");
+  overlay.className = "pdf-loading-overlay";
+  overlay.innerHTML = `
+          <div class="pdf-loading-card">
+            <div class="pdf-spinner"></div>
+            <p class="pdf-loading-text">Gerando visualização...</p>
+          </div>
+        `;
+  document.body.appendChild(overlay);
+
+  const estiloOriginalContainer = containerScroll.style.overflow;
+  const estiloOriginalElemento = elementoOriginal.style.height;
+
+  try {
+    containerScroll.style.overflow = "visible";
+    elementoOriginal.style.height = "auto";
+
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    // Mesmas configurações do seu motor de PDF
+    const opcoes = {
+      margin: [12, 10, 15, 10],
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        scrollY: -window.scrollY,
+        scrollX: 0,
+        windowWidth: document.documentElement.offsetWidth,
+      },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: {
+        mode: ["css", "legacy"],
+        avoid: [
+          ".pdf-block",
+          "img",
+          "figure",
+          "table",
+          "tr",
+          ".infografico-container",
+          ".tabela-doacao-container",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "blockquote",
+        ],
+      },
+    };
+
+    const worker = html2pdf().set(opcoes).from(elementoOriginal);
+    await worker.toContainer().toCanvas().toPdf();
+
+    const pdf = await worker.get("pdf");
+
+    // Injeção de Rodapé e Paginação
+    if (pdf) {
+      const totalPaginas = pdf.internal.getNumberOfPages();
+
+      for (let i = 1; i <= totalPaginas; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(8);
+        pdf.setTextColor(100);
+
+        const larguraPagina = pdf.internal.pageSize.getWidth();
+        const alturaPagina = pdf.internal.pageSize.getHeight();
+
+        pdf.setDrawColor(200, 200, 200);
+        pdf.line(10, alturaPagina - 12, larguraPagina - 10, alturaPagina - 12);
+
+        pdf.text(
+          "Todos os Direitos Reservados | Criado por: Demetrio dos Anjos",
+          10,
+          alturaPagina - 7,
+        );
+
+        pdf.text(
+          `Página ${i} de ${totalPaginas}`,
+          larguraPagina - 10,
+          alturaPagina - 7,
+          { align: "right" },
+        );
+      }
+    }
+
+    // 2. GERAÇÃO DA URL BLOB E ABERTURA EM NOVA ABA
+    const pdfBlob = pdf.output("blob");
+    const blobUrl = URL.createObjectURL(pdfBlob);
+
+    // Abre o PDF gerado no visualizador nativo do navegador
+    window.open(blobUrl, "_blank");
+
+    overlay.remove();
+  } catch (erro) {
+    console.error("Erro ao gerar pré-visualização do PDF:", erro);
+    alert("Falha ao gerar visualização.");
+    overlay.remove();
+  } finally {
+    containerScroll.style.overflow = estiloOriginalContainer;
+    elementoOriginal.style.height = estiloOriginalElemento;
+  }
+}
+
+// Vinculação do evento no seu script de inicialização do app.js
+document.addEventListener("DOMContentLoaded", () => {
+  const btnVisualizar = document.getElementById("visualizar");
+  if (btnVisualizar) {
+    btnVisualizar.addEventListener("click", (e) => {
+      e.preventDefault();
+      visualizarPDF();
+    });
+  }
+});
+
+/* ==========================================================
       4. CONTROLE DO MENU RESPONSIVO (HAMBÚRGUER / GAVETA MOBILE)
       ========================================================== */
 
@@ -150,8 +280,8 @@ function carregarMateria(id) {
 }
 
 /* ==========================================================
-      7. GERAÇÃO DE PDF E DOWNLOAD (SUPORTE MULTI-DEVICE)
-      ========================================================== */
+   7. GERAÇÃO DE PDF E DOWNLOAD (SUPORTE MULTI-DEVICE)
+   ========================================================== */
 async function baixarPDF() {
   const elementoOriginal = document.getElementById("content-article");
   const containerScroll =
@@ -186,14 +316,13 @@ async function baixarPDF() {
   const estiloOriginalElemento = elementoOriginal.style.height;
   const posicaoScrollOriginal = window.scrollY;
 
-  // Checa se o acesso é mobile para travar offset de scroll
   const isMobile =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
     ) || window.innerWidth < 768;
 
   try {
-    // Liberar limites de overflow para que o html2canvas meça a altura real total
+    // Liberar limites de overflow para o html2canvas medir a altura total sem travar
     containerScroll.style.overflow = "visible";
     elementoOriginal.style.height = "auto";
 
@@ -201,8 +330,7 @@ async function baixarPDF() {
       window.scrollTo(0, 0);
     }
 
-    // Delay para garantir renderização do DOM
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     const titulomateria = materiaAtiva?.titulo || "materia";
     const nomeArquivo =
@@ -212,9 +340,9 @@ async function baixarPDF() {
         .toLowerCase()
         .replace(/\s+/g, "-") + ".pdf";
 
-    // Configurações do html2pdf.js
+    // Configurações otimizadas do html2pdf.js sem conflito de algoritmo
     const opcoes = {
-      margin: [10, 10, 12, 10], // Topo, Esquerda, Baixo, Direita (mm)
+      margin: [12, 10, 15, 10], // Topo, Esquerda, Baixo, Direita (mm)
       filename: nomeArquivo,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: {
@@ -228,16 +356,19 @@ async function baixarPDF() {
       },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       pagebreak: {
-        mode: ["avoid-all", "css"],
+        mode: ["css", "legacy"], // Removido 'avoid-all' para parar o conflito
         avoid: [
+          ".pdf-block",
           "img",
-          "svg",
           "figure",
+          "table",
+          "tr",
           ".infografico-container",
-          "p",
-          "li",
+          ".tabela-doacao-container",
+          "h1",
           "h2",
           "h3",
+          "h4",
           "blockquote",
         ],
       },
@@ -271,7 +402,7 @@ async function baixarPDF() {
           alturaPagina - 7,
         );
 
-        // Numeração da Página no Canto Direito
+        // Numeração da Página
         pdf.text(
           `Página ${i} de ${totalPaginas}`,
           larguraPagina - 10,
@@ -283,7 +414,6 @@ async function baixarPDF() {
 
     await worker.save();
 
-    // Feedback visual de término
     spinner.style.display = "none";
     mensagem.textContent = "Download concluído!";
 
@@ -295,7 +425,6 @@ async function baixarPDF() {
     alert("Ocorreu um erro ao gerar o PDF. Verifique o console.");
     overlay.remove();
   } finally {
-    // Restauração das propriedades de tela e rolagem
     containerScroll.style.overflow = estiloOriginalContainer;
     elementoOriginal.style.height = estiloOriginalElemento;
 
