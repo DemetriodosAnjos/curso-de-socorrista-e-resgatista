@@ -8,18 +8,20 @@ import { cinematicaTrauma } from "./modulos/cinematica-trauma.js";
 import { abordagemSecundaria } from "./modulos/abordagem-secundaria.js";
 import { biosegurancaEticaAnatomia } from "./modulos/bioseguranca-etica-anatomia.js";
 import { eticaBioetica } from "./modulos/etica-bioetica.js";
+import { historiaAph } from "./modulos/historia-aph.js";
 
 /* ==========================================================
       2. AGRUPADOR CENTRAL DE DADOS
       ========================================================== */
 const materiasData = {
-  "anatomia-humana-basica": anatomiaHumanaBasica,
   "abordagem-radio-codigo": abordagemRadioCodigo,
-  "abordagem-primaria": abordagemPrimaria,
   "cinematica-trauma": cinematicaTrauma,
   "abordagem-secundaria": abordagemSecundaria,
-  "bioseguranca-etica-anatomia": biosegurancaEticaAnatomia,
+  "abordagem-primaria": abordagemPrimaria,
   "etica-bioetica": eticaBioetica,
+  "anatomia-humana-basica": anatomiaHumanaBasica,
+  "bioseguranca-etica-anatomia": biosegurancaEticaAnatomia,
+  "historia-aph": historiaAph,
 };
 
 /* ==========================================================
