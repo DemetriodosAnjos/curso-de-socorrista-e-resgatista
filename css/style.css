@@ -122,9 +122,10 @@ body {
 }
 
 /* Título principal do artigo */
-#content-article h2 {
+#content-article h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
+  color: var(--primary-color);
 }
 
 /* Estilização e espaçamentos do corpo do conteúdo */
@@ -142,12 +143,12 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#content-body h1,
-#content-body h2 {
+#content-body h2,
+#content-body h2.titulo-materia {
   font-size: 1.75rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 #content-body h3 {
