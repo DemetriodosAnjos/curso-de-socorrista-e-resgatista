@@ -204,6 +204,14 @@ body {
     transform 0.1s ease;
 }
 
+/*Ícone btn download*/
+.hrfn3y {
+  fill: currentColor;
+  d: path(
+    "m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+  );
+}
+
 .btn-share {
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
@@ -212,6 +220,15 @@ body {
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.1s ease;
+}
+
+/*Ícone btn compartilhar*/
+.u8r-wt {
+  fill: currentColor;
+  d: path(
+    "M17 22q-1.25 0-2.125-.875T14 19q0-.15.075-.7L7.05 14.2q-.4.375-.925.588T5 15q-1.25 0-2.125-.875T2 12t.875-2.125T5 9q.6 0 1.125.213t.925.587l7.025-4.1q-.05-.175-.062-.337T14 5q0-1.25.875-2.125T17 2t2.125.875T20 5t-.875 2.125T17 8q-.6 0-1.125-.213T14.95 7.2l-7.025 4.1q.05.175.063.338T8 12t-.012.363t-.063.337l7.025 4.1q.4-.375.925-.587T17 16q1.25 0 2.125.875T20 19t-.875 2.125T17 22"
+  );
+  transition: fill 0.2s ease; /* Transição suave de cor */
 }
 
 .btn-download:hover {
@@ -306,16 +323,33 @@ body {
 /* Botão Visualizar PDF (Provisório) */
 .btn-visualizar {
   color: #333;
-  background-color: #e0e0e0;
-  border: 2px solid #ccc;
+  background-color: transparent;
+
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
 }
 
 .btn-visualizar:hover {
-  background-color: #d0d0d0;
-  border-color: #bbb;
+  color: #018dca;
+}
+
+/*Ícone visualizar*/
+.n1lsfm {
+  fill: currentColor;
+  fill-rule: evenodd;
+}
+
+.wxzl2v {
+  d: path(
+    "M12 8.25a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0"
+  );
+}
+
+.zlqivz {
+  d: path(
+    "M12 3.25c-4.514 0-7.555 2.704-9.32 4.997l-.031.041c-.4.519-.767.996-1.016 1.56c-.267.605-.383 1.264-.383 2.152s.116 1.547.383 2.152c.25.564.617 1.042 1.016 1.56l.032.041C4.445 18.046 7.486 20.75 12 20.75s7.555-2.704 9.32-4.997l.031-.041c.4-.518.767-.996 1.016-1.56c.267-.605.383-1.264.383-2.152s-.116-1.547-.383-2.152c-.25-.564-.617-1.041-1.016-1.56l-.032-.041C19.555 5.954 16.514 3.25 12 3.25M3.87 9.162C5.498 7.045 8.15 4.75 12 4.75s6.501 2.295 8.13 4.412c.44.57.696.91.865 1.292c.158.358.255.795.255 1.546s-.097 1.188-.255 1.546c-.169.382-.426.722-.864 1.292C18.5 16.955 15.85 19.25 12 19.25s-6.501-2.295-8.13-4.412c-.44-.57-.696-.91-.865-1.292c-.158-.358-.255-.795-.255-1.546s.097-1.188.255-1.546c.169-.382.426-.722.864-1.292"
+  );
 }
 
 /* ==========================================================
