@@ -9,13 +9,15 @@
   --border-color: #e0e0e0;
 }
 
-/* Container da Modal e Overlay (Req. 1) */
+/* Container da Modal e Overlay */
 .simulado-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
+  /* Substitui 100vh por 100dvh (Dynamic Viewport Height) com fallback */
   height: 100vh;
+  height: 100dvh;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
@@ -29,7 +31,9 @@
   background-color: #ffffff;
   width: 100%;
   max-width: 720px;
+  /* Troca 90vh por 90dvh para respeitar barras nativas do browser */
   max-height: 90vh;
+  max-height: 90dvh;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -37,12 +41,13 @@
   overflow: hidden;
 }
 
-/* Header */
+/* Header - Impedir encolhimento */
 .simulado-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 1.5rem;
+  flex-shrink: 0; /* Impede o header de esmagar */
 }
 
 .simulado-header h2 {
@@ -68,13 +73,15 @@
   border: none;
   border-top: 1px solid #e5e5e5;
   margin: 0;
+  flex-shrink: 0;
 }
 
 /* Corpo e Scroll */
 .simulado-body {
   padding: 1.5rem;
   overflow-y: auto;
-  flex: 1;
+  flex: 1 1 auto; /* Permite rolar apenas o conteúdo interno */
+  -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
 }
 
 .simulado-step-info {
@@ -92,7 +99,7 @@
   line-height: 1.4;
 }
 
-/* Opções de Respostas (Req. 4 e 5) */
+/* Opções de Respostas */
 .simulado-opcoes {
   list-style: none;
   padding: 0;
@@ -133,6 +140,11 @@
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.simulado-opcao-texto {
+  word-break: break-word; /* Evita quebra de layout em textos longos */
 }
 
 .simulado-opcao.is-active .simulado-opcao-badge {
@@ -140,13 +152,14 @@
   color: #fff;
 }
 
-/* Footer e Botões (Req. 6 e 7) */
+/* Footer e Botões - Impedir encolhimento e fixar na base */
 .simulado-footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid #e5e5e5;
   display: flex;
   justify-content: space-between;
   background-color: #fafafa;
+  flex-shrink: 0; /* Garante que os botões nunca fiquem esmagados */
 }
 
 .simulado-btn {
@@ -181,7 +194,7 @@
   cursor: not-allowed;
 }
 
-/* Tela de Resultado e Gabarito (Req. 8 e 9) */
+/* Tela de Resultado e Gabarito */
 .simulado-resultado-header {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -228,6 +241,7 @@
   display: flex;
   gap: 1rem;
   font-size: 0.8rem;
+  flex-wrap: wrap;
 }
 
 /* Cards do Gabarito Final */
@@ -281,4 +295,51 @@
   border-top: 1px dashed #ddd;
   font-size: 0.875rem;
   color: #444;
+}
+
+/* ==========================================================
+     2. MEDIA QUERIES (AJUSTES ESPECÍFICOS PARA MOBILE)
+     ========================================================== */
+@media (max-width: 600px) {
+  .simulado-overlay {
+    padding: 0.5rem; /* Menos margem externa para reaproveitar tela */
+  }
+
+  .simulado-container {
+    height: 100%;
+    max-height: 100dvh; /* Ocupa 100% da altura visível no celular */
+    border-radius: 8px;
+  }
+
+  .simulado-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .simulado-header h2 {
+    font-size: 1rem;
+  }
+
+  .simulado-body {
+    padding: 1rem;
+  }
+
+  .simulado-enunciado {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .simulado-opcao {
+    padding: 0.75rem;
+  }
+
+  .simulado-footer {
+    padding: 0.75rem 1rem;
+    /* Adiciona padding-bottom dinâmico para iPhones com barra inferior (home indicator) */
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .simulado-btn {
+    padding: 0.75rem 1rem; /* Botões ligeiramente maiores para toque */
+    font-size: 0.9rem;
+  }
 }
