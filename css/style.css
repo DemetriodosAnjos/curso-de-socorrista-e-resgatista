@@ -188,11 +188,14 @@ body {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 1rem;
   border: none;
+}
+
+.btn-simulado-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .btn-download,

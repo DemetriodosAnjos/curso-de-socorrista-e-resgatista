@@ -1,8 +1,8 @@
 // ./modulos/abordagem-primaria.js
 
-export const abordagemRadioCodigo = {
-  titulo: "Abordagem Rádio e Código Q",
-  slug: "abordagem-radio-codigo",
+export const radioCodigo = {
+  titulo: "Rádio e Código Q",
+  slug: "radio-codigo",
   turma: "Soc16",
   professores: "Guilherme / Edson",
 
@@ -80,14 +80,27 @@ export const abordagemRadioCodigo = {
                 </p>
 
             <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
-            <div style="margin-top: 2rem;">
+            <div class="btn-simulado-container" style="margin-top: 2rem;">
                 <a href="#" class="btn-simulado" data-simulado="alfabeto-fonetico">
-                <i class="icon-quiz"></i> Realizar Simulado Alfabeto Fonético
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  <path d="m9 14 2 2 4-4"></path>
+                </svg>
+                Simulado Alfabeto Fonético
                 </a>
-            </div>
 
-                
-        
+                <a href="#" class="btn-simulado" data-simulado="codigo-q">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  <path d="m9 14 2 2 4-4"></path>
+                </svg>
+                Simulado Código Q
+                </a>
+
+            </div>
+   
         </section>
         <div style="page-break-before: always; break-before: page;"></div>        
 

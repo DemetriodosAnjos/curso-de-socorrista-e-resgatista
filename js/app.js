@@ -3,7 +3,7 @@
    ========================================================== */
 import { anatomiaHumanaBasica } from "./modulos/anatomia-humana-basica.js";
 import { abordagemPrimaria } from "./modulos/abordagem-primaria.js";
-import { abordagemRadioCodigo } from "./modulos/abordagem-radio-codigo.js";
+import { radioCodigo } from "./modulos/radio-codigo.js";
 import { cinematicaTrauma } from "./modulos/cinematica-trauma.js";
 import { abordagemSecundaria } from "./modulos/abordagem-secundaria.js";
 import { biosegurancaEticaAnatomia } from "./modulos/bioseguranca-etica-anatomia.js";
@@ -16,12 +16,13 @@ import { simuladoBioetica } from "./data/simulado-bioetica.js";
 import { simuladoAlfabetoFonetico } from "./data/simulado-alfabeto-fonetico.js";
 import { simuladoAbordagemPrimaria } from "./data/simulado-abordagem-primaria.js";
 import { simuladoAbordagemSecundaria } from "./data/simulado-abordagem-secundaria.js";
+import { simuladoCodigoQ } from "./data/simulado-codigo-q.js";
 
 /* ==========================================================
       2. AGRUPADOR CENTRAL DE DADOS
       ========================================================== */
 const materiasData = {
-  "abordagem-radio-codigo": abordagemRadioCodigo,
+  "radio-codigo": radioCodigo,
   "abordagem-secundaria": abordagemSecundaria,
   "abordagem-primaria": abordagemPrimaria,
   "cinematica-trauma": cinematicaTrauma,
@@ -39,6 +40,7 @@ const simuladosMap = {
   "alfabeto-fonetico": simuladoAlfabetoFonetico,
   "abordagem-primaria": simuladoAbordagemPrimaria,
   "abordagem-secundaria": simuladoAbordagemSecundaria,
+  "codigo-q": simuladoCodigoQ,
 };
 
 /* ==========================================================
