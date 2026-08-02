@@ -181,7 +181,8 @@ body {
   gap: 1rem;
 }
 
-.btn {
+.btn,
+.btn-simulado {
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   font-weight: bold;
@@ -194,7 +195,8 @@ body {
   border: none;
 }
 
-.btn-download {
+.btn-download,
+.btn-simulado {
   color: #fff;
   background-color: var(--primary-color);
   border: 2px solid var(--primary-color);
@@ -231,7 +233,8 @@ body {
   transition: fill 0.2s ease; /* Transição suave de cor */
 }
 
-.btn-download:hover {
+.btn-download:hover,
+.btn-simulado:hover {
   border: 2px solid #018dca;
   background-color: #018dca;
   color: #fff;
@@ -244,6 +247,7 @@ body {
 }
 
 .btn-download:active,
+.btn-simulado:active,
 .btn-share:active {
   transform: translateY(1px);
 }

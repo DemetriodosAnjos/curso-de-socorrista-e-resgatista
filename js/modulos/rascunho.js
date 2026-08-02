@@ -12,3 +12,10 @@
             <li></li>
         </ul>
 </section>
+
+<!-- BOTÃO DO SIMULADO DA MATÉRIA -->
+<div style="margin-top: 2rem;">
+  <a href="#" class="btn-simulado" data-simulado="alfabeto-fonetico">
+    <i class="icon-quiz"></i> Realizar Simulado Alfabeto Fonético
+  </a>
+</div>

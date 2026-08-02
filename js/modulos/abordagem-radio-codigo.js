@@ -78,6 +78,15 @@ export const abordagemRadioCodigo = {
                    que apenas a prática e o uso contínuo desse sistema trará facilidade e entendimento dessa
                    comunicação. 
                 </p>
+
+            <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
+            <div style="margin-top: 2rem;">
+                <a href="#" class="btn-simulado" data-simulado="alfabeto-fonetico">
+                <i class="icon-quiz"></i> Realizar Simulado Alfabeto Fonético
+                </a>
+            </div>
+
+                
         
         </section>
         <div style="page-break-before: always; break-before: page;"></div>        

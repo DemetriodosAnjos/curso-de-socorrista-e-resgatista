@@ -283,6 +283,13 @@ export const abordagemPrimaria = {
             </p>
   
             <img src="images/abordagem-primaria/exposicao-controle.png" alt="Exposição e Controle do ambiente">
+
+            <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
+              <div style="margin-top: 2rem;">
+                <a href="#" class="btn-simulado" data-simulado="abordagem-primaria">
+                <i class="icon-quiz"></i> Realizar Simulado Abordagem Primária
+                </a>
+              </div>
   
             <h1>Referências</h1>
   

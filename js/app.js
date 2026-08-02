@@ -10,18 +10,35 @@ import { biosegurancaEticaAnatomia } from "./modulos/bioseguranca-etica-anatomia
 import { eticaBioetica } from "./modulos/etica-bioetica.js";
 import { historiaAph } from "./modulos/historia-aph.js";
 
+// Importações do Simulado
+import { initSimulado } from "./simulado-engine.js";
+import { simuladoBioetica } from "./data/simulado-bioetica.js";
+import { simuladoAlfabetoFonetico } from "./data/simulado-alfabeto-fonetico.js";
+import { simuladoAbordagemPrimaria } from "./data/simulado-abordagem-primaria.js";
+import { simuladoAbordagemSecundaria } from "./data/simulado-abordagem-secundaria.js";
+
 /* ==========================================================
       2. AGRUPADOR CENTRAL DE DADOS
       ========================================================== */
 const materiasData = {
   "abordagem-radio-codigo": abordagemRadioCodigo,
-  "cinematica-trauma": cinematicaTrauma,
   "abordagem-secundaria": abordagemSecundaria,
   "abordagem-primaria": abordagemPrimaria,
+  "cinematica-trauma": cinematicaTrauma,
   "etica-bioetica": eticaBioetica,
   "anatomia-humana-basica": anatomiaHumanaBasica,
-  "bioseguranca-etica-anatomia": biosegurancaEticaAnatomia,
-  "historia-aph": historiaAph,
+  //"bioseguranca-etica-anatomia": biosegurancaEticaAnatomia,
+  //"historia-aph": historiaAph,
+};
+
+/* ==========================================================
+      2.1 MAPEAMENTO DOS SIMULADOS
+   ========================================================== */
+const simuladosMap = {
+  "etica-bioetica": simuladoBioetica,
+  "alfabeto-fonetico": simuladoAlfabetoFonetico,
+  "abordagem-primaria": simuladoAbordagemPrimaria,
+  "abordagem-secundaria": simuladoAbordagemSecundaria,
 };
 
 /* ==========================================================
@@ -493,3 +510,26 @@ if (materiaParam) {
   );
   if (keyEncontrada) carregarMateria(keyEncontrada);
 }
+
+/* ==========================================================
+   10. CONTROLE DO SIMULADO (DELEGAÇÃO DE EVENTO)
+   ========================================================== */
+
+// Captura cliques em botões de simulado injetados dinamicamente no corpo da matéria
+document.addEventListener("click", (event) => {
+  const btnSimulado = event.target.closest(".btn-simulado");
+
+  if (btnSimulado) {
+    event.preventDefault();
+
+    // Pega o slug definido no atributo data-simulado (ex: data-simulado="etica-bioetica")
+    const simuladoSlug = btnSimulado.getAttribute("data-simulado");
+    const contratoSimulado = simuladosMap[simuladoSlug];
+
+    if (contratoSimulado) {
+      initSimulado(contratoSimulado);
+    } else {
+      console.error(`Simulado não encontrado para o slug: ${simuladoSlug}`);
+    }
+  }
+});

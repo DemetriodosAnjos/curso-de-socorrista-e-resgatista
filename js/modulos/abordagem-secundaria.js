@@ -127,6 +127,13 @@ export const abordagemSecundaria = {
 
             <img src="images/abordagem-secundaria/abordagem-ssvv.png" alt="Avaliação de Sinais Vitais">
 
+            <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
+              <div style="margin-top: 2rem;">
+                <a href="#" class="btn-simulado" data-simulado="abordagem-secundaria">
+                <i class="icon-quiz"></i> Realizar Simulado Abordagem Secundária
+                </a>
+              </div>
+
       <!--BLOCO: REFERÊNCIAS-->
       <section class="pdf-block">
 
