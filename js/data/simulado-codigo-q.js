@@ -69,12 +69,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QAP indica que a unidade está em posição de escuta, 'Atento, em atenção'.",
+        "QAP indica que a unidade está em posição de escuta, 'Atento, na escuta'.",
     },
     {
       id: 3,
       enunciado:
-        "O operador pergunta se a viatura pode receber as coordenadas. A equipe responde que está pronta para 'Prosseguir'. Qual é o código correto?",
+        "O operador pergunta se a viatura pode receber as coordenadas. A equipe responde que está pronta para 'Atender/Prosseguir'. Qual é o código correto?",
       opcoes: [
         { id: "A", texto: "QTC" },
         { id: "B", texto: "QRV" },
@@ -83,7 +83,7 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "B",
       explicacao:
-        "QRV significa estar pronto, disponível ou autorizado a 'Prosseguir'.",
+        "QRV significa estar pronto, disponível ou à disposição para o atendimento.",
     },
     {
       id: 4,
@@ -97,12 +97,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "C",
       explicacao:
-        "QRX instrui a outra estação a aguardar ou permanecer 'Em espera'.",
+        "QRX instrui a outra estação a aguardar um momento ou permanecer 'Em espera'.",
     },
     {
       id: 5,
       enunciado:
-        "A central pergunta à viatura qual o seu 'Horário' exato de encerramento do turno. Qual código expressa essa informação?",
+        "A equipe finalizou o plantão e vai encerrar o tráfego de rádio e sair de serviço. Qual código deve ser informado?",
       opcoes: [
         { id: "A", texto: "QRT" },
         { id: "B", texto: "QAR" },
@@ -111,7 +111,7 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QRT é utilizado para se referir ao 'Horário' ou cessação das transmissões.",
+        "QRT é utilizado para encerrar as transmissões ou indicar que a estação está fora de serviço.",
     },
     {
       id: 6,
@@ -125,12 +125,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "C",
       explicacao:
-        "QTH refere-se à localização geográfica ou 'Local da ocorrência'.",
+        "QTH refere-se à localização geográfica, endereço ou posição atual.",
     },
     {
       id: 7,
       enunciado:
-        "A central entra em contato com a equipe e pergunta: 'Existe algum evento ou atendimento em andamento?'. O termo técnico para 'Ocorrência' é:",
+        "A central entra em contato com a equipe e pergunta: 'Existe algum problema ou novidade?'. O código utilizado para perguntar ou informar sobre uma ocorrência/problema é:",
       opcoes: [
         { id: "A", texto: "QRU" },
         { id: "B", texto: "QTC" },
@@ -139,12 +139,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QRU refere-se a se há ou não uma 'Ocorrência' / chamado a ser atendido.",
+        "QRU refere-se a 'Tem algo para mim?' ou se há novidade/ocorrência a ser atendida.",
     },
     {
       id: 8,
       enunciado:
-        "O operador de rádio precisa saber se o evento se trata de acidente de trânsito, clínico ou agressão. Ele pede a 'Natureza da ocorrência' através do código:",
+        "O operador de rádio precisa repassar um boletim de dados completo sobre a ocorrência para a equipe. Esse relatório/mensagem transmitido via rádio é chamado de:",
       opcoes: [
         { id: "A", texto: "QRA" },
         { id: "B", texto: "QTC" },
@@ -153,26 +153,26 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "B",
       explicacao:
-        "QTC diz respeito à 'Natureza da ocorrência' (mensagem ou dados do evento).",
+        "QTC diz respeito a 'Mensagem', 'Notícia' ou 'Boletim de informação' a ser transmitido.",
     },
     {
       id: 9,
       enunciado:
-        "Durante a regulação médica, o socorrista informa o 'Nome da vítima' para registro na ficha. Qual código é utilizado para identificar o nome?",
+        "Durante a regulação médica, o socorrista informa o 'Nome do operador ou da estação' para registro. Qual código é utilizado para identificar o nome?",
       opcoes: [
         { id: "A", texto: "QRA" },
         { id: "B", texto: "QSO" },
         { id: "C", texto: "QTI" },
-        { id: "D", texto: "THS" },
+        { id: "D", texto: "TKS" },
       ],
       respostaCorreta: "A",
       explicacao:
-        "QRA é a designação codificada para nome da pessoa/vítima ou identificador da estação.",
+        "QRA é a designação codificada para o nome do operador, da estação ou da equipe.",
     },
     {
       id: 10,
       enunciado:
-        "Um chamado duplicado foi gerado por engano. A central transmite uma ordem de 'Cancelamento / Correção' da chamada através do código:",
+        "Um chamado duplicado foi gerado por engano. A central transmite uma ordem de 'Cancelar o procedimento ou chamada' através do código:",
       opcoes: [
         { id: "A", texto: "QRT" },
         { id: "B", texto: "QRX" },
@@ -181,12 +181,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "C",
       explicacao:
-        "QTA significa o 'Cancelamento' de um despacho, ordem ou 'Correção' de mensagem anterior.",
+        "QTA significa o cancelamento de uma mensagem anterior, despacho ou ordem.",
     },
     {
       id: 11,
       enunciado:
-        "A equipe aciona o rádio e informa que está 'Em deslocamento / Indo à' cena do acidente. Qual o código correto?",
+        "A equipe aciona o rádio e informa que está 'Em deslocamento / A caminho' da cena do acidente. Qual o código correto?",
       opcoes: [
         { id: "A", texto: "QTI" },
         { id: "B", texto: "QAR" },
@@ -195,26 +195,25 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QTI representa o 'Deslocamento' ativo ou ação de 'Ir à' determinado local.",
+        "QTI representa o deslocamento ativo, estar 'A caminho' de um destino.",
     },
     {
       id: 12,
       enunciado:
-        "A equipe precisa realizar a pausa regulamentar para refeição ('Almoço / Janta'). Qual código deve ser informado à central?",
+        "A equipe precisa realizar a pausa regulamentar para refeição ('Almoço / Janta'). Qual código representa a pausa para refeição?",
       opcoes: [
         { id: "A", texto: "QTO" },
-        { id: "B", texto: "QAR" },
+        { id: "B", texto: "QTL" },
         { id: "C", texto: "QRM" },
         { id: "D", texto: "QSA" },
       ],
       respostaCorreta: "B",
-      explicacao:
-        "QAR é a sinalização de parada logística para refeições ('Almoço/Janta').",
+      explicacao: "QTL é o código designado para refeição (Almoço / Jantar).",
     },
     {
       id: 13,
       enunciado:
-        "Uma chuva forte com descargas elétricas causa chiados na transmissão do rádio. O termo usado para indicar 'Ruído ou Interferência' é:",
+        "Uma chuva forte com descargas elétricas causa chiados na transmissão do rádio. O termo usado para indicar 'Interferência humana ou ruído' é:",
       opcoes: [
         { id: "A", texto: "QRM" },
         { id: "B", texto: "RPT" },
@@ -223,12 +222,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QRM refere-se à presença de 'Ruído, interferência' humana ou atmosférica no canal de rádio.",
+        "QRM refere-se à presença de interferência na frequência ou ruídos na transmissão.",
     },
     {
       id: 14,
       enunciado:
-        "Quando duas unidades precisam 'Comunicar-se diretamente' sem passar pela triagem do operador, elas realizam um:",
+        "Quando duas unidades precisam 'Comunicar-se diretamente' entre si via rádio, elas realizam um:",
       opcoes: [
         { id: "A", texto: "CCO" },
         { id: "B", texto: "QSO" },
@@ -237,12 +236,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "B",
       explicacao:
-        "QSO é o contato ou ato de 'Comunicar-se diretamente' entre duas estações/rádios.",
+        "QSO é o contato direto ou conversa ponto a ponto entre duas estações de rádio.",
     },
     {
       id: 15,
       enunciado:
-        "Ao testar a transmissão do rádio comunicador, o operador pergunta ao socorrista sobre a 'Qualidade da mensagem' em uma escala de 1 a 5. O código correto para esse teste é:",
+        "Ao testar a transmissão do rádio comunicador, o operador pergunta ao socorrista sobre a 'Qualidade do sinal / Clareza da áudio'. O código correto para esse teste é:",
       opcoes: [
         { id: "A", texto: "QSA" },
         { id: "B", texto: "QRM" },
@@ -251,12 +250,12 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "QSA mede e reporta a 'Qualidade da mensagem' (inteligibilidade do áudio de 1 a 5).",
+        "QSA mede a intensidade/qualidade dos sinais da estação (clareza de transmissão).",
     },
     {
       id: 16,
       enunciado:
-        "O condutor socorrista precisa fazer uma pausa fisiológica rápida para uso do 'Banheiro'. O código apropriado para essa comunicação é:",
+        "O condutor socorrista precisa fazer uma pausa rápida para uso do 'Banheiro' (necessidades fisiológicas). O código apropriado para essa comunicação é:",
       opcoes: [
         { id: "A", texto: "QAR" },
         { id: "B", texto: "QTO" },
@@ -265,7 +264,7 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "B",
       explicacao:
-        "QTO é o código padronizado utilizado para sinalizar ida ao 'Banheiro' (necessidade fisiológica).",
+        "QTO é o código utilizado para sinalizar ida ao banheiro / pausa para necessidades fisiológicas.",
     },
     {
       id: 17,
@@ -275,15 +274,15 @@ export const simuladoCodigoQ = {
         { id: "A", texto: "CCO" },
         { id: "B", texto: "VTR" },
         { id: "C", texto: "QTI" },
-        { id: "D", texto: "THS" },
+        { id: "D", texto: "TKS" },
       ],
       respostaCorreta: "B",
-      explicacao: "VTR é a abreviação operacional para 'Viatura'.",
+      explicacao: "VTR é a sigla operacional para 'Viatura'.",
     },
     {
       id: 18,
       enunciado:
-        "Sigla referente ao setor concentrador de dados de telemetria e coordenação, conhecida como 'Central de Informações':",
+        "Sigla referente ao setor concentrador de coordenação e regulação dos chamados, conhecido como 'Centro de Controle Operacional':",
       opcoes: [
         { id: "A", texto: "VTR" },
         { id: "B", texto: "CCO" },
@@ -291,8 +290,7 @@ export const simuladoCodigoQ = {
         { id: "D", texto: "QTC" },
       ],
       respostaCorreta: "B",
-      explicacao:
-        "CCO é a sigla para 'Central de Informações' (Centro de Controle Operacional).",
+      explicacao: "CCO é a sigla para Centro de Controle Operacional.",
     },
     {
       id: 19,
@@ -306,7 +304,7 @@ export const simuladoCodigoQ = {
       ],
       respostaCorreta: "A",
       explicacao:
-        "RPT é a sigla utilizada na comunicação de rádio para 'Repetir mensagem'.",
+        "RPT é a sigla utilizada para solicitar a repetição de uma mensagem.",
     },
     {
       id: 20,
@@ -314,13 +312,13 @@ export const simuladoCodigoQ = {
         "Após o recebimento de um suporte importante fornecido por outra equipe, o operador envia uma mensagem de 'Agradecimento / Obrigado' codificada como:",
       opcoes: [
         { id: "A", texto: "QSL" },
-        { id: "B", texto: "THS" },
+        { id: "B", texto: "TKS" },
         { id: "C", texto: "QRV" },
         { id: "D", texto: "QAP" },
       ],
       respostaCorreta: "B",
       explicacao:
-        "THS é a sigla abreviada de cortesia referente a 'Agradecimento, obrigado' (Thanks).",
+        "TKS (ou THS) é a sigla abreviada referente a 'Obrigado / Agradecido' (Thanks).",
     },
   ],
 };

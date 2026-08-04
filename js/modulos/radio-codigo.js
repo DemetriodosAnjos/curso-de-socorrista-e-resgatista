@@ -88,6 +88,32 @@ export const radioCodigo = {
             <div class="img-materia-container">
                 <img src="images/abordagem-radio-codigo/codigo-q.png" alt="Radio Código Q">
             </div>
+
+            <div class="lista-ul">
+                <strong>Os principais Códigos mais usados durante uma ocorrência de ambulância são:</strong> 
+                <ul class="lista-codigos-q">
+                    <li><strong>QSL:</strong> Entendido / Confirmado / Copiado (confirmação de recebimento da mensagem);</li>
+                    <li><strong>QAP:</strong> Na escuta / Na frequência / Aguardando na linha de rádio;</li>
+                    <li><strong>QRV:</strong> À disposição / Pronto para atender / Às ordens;</li>
+                    <li><strong>QRX:</strong> Aguarde um momento / Espere na frequência;</li>
+                    <li><strong>QRT:</strong> Encerrar transmissões / Fora de serviço / Desligando o rádio;</li>
+                    <li><strong>QTH:</strong> Localização exata / Endereço / Posição atual;</li>
+                    <li><strong>QRU:</strong> Novidade, problema ou ocorrência? (Geralmente usado como "Sem QRU" para dizer que não há problemas ou novidades);</li>
+                    <li><strong>QTC:</strong> Mensagem / Notícia / Boletim para transmitir;</li>
+                    <li><strong>QRA:</strong> Nome do operador / Nome da estação ou da equipe;</li>
+                    <li><strong>QTA:</strong> Cancelar a mensagem anterior / Cancelar o procedimento ou chamada;</li>
+                    <li><strong>QTI:</strong> A caminho / Em deslocamento para o local;</li>
+                    <li><strong>QAR:</strong> Desligar / Abandonar a frequência ou o local;</li>
+                    <li><strong>QRM:</strong> Interferência humana na transmissão (ruído de outras rádios ou conversas paralelamente na frequência);</li>
+                    <li><strong>QSO:</strong> Contato direto / Conversa direta entre duas estações via rádio;</li>
+                    <li><strong>QTO:</strong> Banheiro / Necessidades fisiológicas (usado para informar pausa no serviço);</li>
+                    <li><strong>VTR:</strong> Viatura (Ambulância, carro de resgate, moto de emergência, etc.);</li>
+                    <li><strong>CCO:</strong> Centro de Controle Operacional (ou Central de Regulação/Central de Comunicação);</li>
+                    <li><strong>QLT:</strong> Jantar / Almoçar / Pausa para Refeição;</li>
+                    <li><strong>TKS:</strong> Obrigado / Agradecido (Abreviação da palavra em inglês "Thanks");</li>
+                    <li><strong>RPT:</strong> Repetidora (equipamento/antena que retransmite o sinal de rádio para ampliar o alcance) ou solicitação de repetição da mensagem ("Repita").</li>
+                </ul>
+            </div>
             
             <h3 class="titulo-h3">Conclusão</h3>
             <div class="text-content">
@@ -118,7 +144,6 @@ export const radioCodigo = {
                 </svg>
                 Simulado Código Q
                 </a>
-
             </div>
    
         </section>

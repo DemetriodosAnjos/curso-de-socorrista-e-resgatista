@@ -551,17 +551,23 @@ if (materiaParam) {
 document.addEventListener("click", (event) => {
   const btnSimulado = event.target.closest(".btn-simulado");
 
-  if (btnSimulado) {
-    event.preventDefault();
+  if (!btnSimulado) return;
 
-    // Pega o slug definido no atributo data-simulado (ex: data-simulado="etica-bioetica")
-    const simuladoSlug = btnSimulado.getAttribute("data-simulado");
-    const contratoSimulado = simuladosMap[simuladoSlug];
+  event.preventDefault();
 
-    if (contratoSimulado) {
+  const simuladoSlug = btnSimulado.getAttribute("data-simulado");
+  const contratoSimulado = simuladosMap[simuladoSlug];
+
+  if (contratoSimulado) {
+    console.log("Iniciando simulado com o contrato:", contratoSimulado);
+
+    try {
       initSimulado(contratoSimulado);
-    } else {
-      console.error(`Simulado não encontrado para o slug: ${simuladoSlug}`);
+      console.log("initSimulado executada sem erros lançados.");
+    } catch (error) {
+      console.error("Erro crítico dentro de initSimulado:", error);
     }
+  } else {
+    console.error(`Simulado não encontrado para o slug: ${simuladoSlug}`);
   }
 });
