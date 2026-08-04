@@ -10,30 +10,40 @@ export const abordagemSecundaria = {
 
       <!--BLOCO 1: ABORDAGEM SECUNDARIA -->
       <section class="abordagem-secundaria">
-        <p>
-          A partir da finalização da abordagem primária, o paciente já deve estar posicionado dentro da viatura,
-          onde daremos início da avaliação secundária, que deve ser realizada com eficiência, buscando algumas
-          informações que promovem melhorar qualidade de atendimento e maior segurança, evitando que possíveis
-          lesões ou alterações da vítima não sejam avaliadas.
-        </p>
-
-        <strong>Dentro da avaliação, será avaliado:</strong>
+        <div class="text-content">
+          <p>
+            A partir da finalização da abordagem primária, o paciente já deve estar posicionado dentro da viatura,
+            onde daremos início da avaliação secundária, que deve ser realizada com eficiência, buscando algumas
+            informações que promovem melhorar qualidade de atendimento e maior segurança, evitando que possíveis
+            lesões ou alterações da vítima não sejam avaliadas.
+          </p>
+        </div>
+        
+        <div class="lista-ul">
+          <strong>Dentro da avaliação, será avaliado:</strong>
           <ul class="lista-avaliacao-secundaria">
             <li>Exame céfalo-podal;</li>
             <li>Sinais vitais;</li>
             <li>Histórico SAMPLE</li>
           </ul>
+        </div>
         
-        <img src="images/abordagem-secundaria/abordagem-secundaria.png" alt="Abordagem Secundária">
+        <div class="img-materia-container">
+          <img src="images/abordagem-secundaria/abordagem-secundaria.png" alt="Abordagem Secundária">
+        </div>
 
-        <strong>Histórico SAMPLE</strong>
+        <h3 class="titulo-h3">Histórico SAMPLE</h3>
+          <div class="text-content">
             <p>
               O histórico SAMPLE é um método estruturado de entrevista rápida utilizado no Atendimento Pré-Hospitalar
               (APH) e em emergências médicas para coletar a história clínica da vítima ou de acompanhantes. O objetivo
               principal é identificar informações vitais para o manejo imediato do paciente, principalmente quando
               ele está consciente ou em rápida deterioração.
             </p>
-            
+          </div>
+          <div style="page-break-before: always; break-before: page;"></div>;
+
+          <div class="lista-ul">
             <strong>Cada letra da sigla SAMPLE representa um passo da investigação:</strong>
               <ul class="lista-sample">
                 <li><strong>S — Sinais e Sintomas (Signs & Symptoms)</strong>
@@ -67,20 +77,27 @@ export const abordagemSecundaria = {
                   após o veículo derrapar na pista";
                 </li>
               </ul>
+          </div>
+          
+          <h3 class="titulo-h3">Abordagem Secundária - Céfalo-Podal</h3>
 
-          <h3>Abordagem Secundária - Céfalo-Podal</h3>
+          <div class="text-content">
             <p>
               Exame céfalo-podal ou céfalo-caudal é o exame físico avaliado da cabeça aos pés. Novamente
               teríamos um VER, OUVIR e SENTIR, de forma mais geral e precisa.
             </p>
+          </div>
 
+          <div class="lista-ul">
             <strong>O próprio PHTLS traz o seguinte:</strong>
               <ul class="lista-phtls">
                 <li>VEJA, não apenas olhe;</li>
                 <li>ESCUTE, não apenas ouça;</li>
                 <li>SINTA, não apenas toque.</li>
               </ul>
+          </div>
 
+          <div class="text-content">
             <p>
               Deve-se então, realizar a palpação, iniciando-se pela cabeça e terminando nós pés, para notar
               alterações anatômicas, crepitações ósseas ou quaisquer divergências que o trauma pode ter gerado
@@ -90,8 +107,9 @@ export const abordagemSecundaria = {
               alterações, a fim de promover melhor visualização e atendimento da área.
 
               O conhecimento anatômico do socorrista será um diferencial neste momento.
-            </p>
-
+            </p> 
+          </div>
+          <div class="lista-ul">
             <strong>Avaliar sequencialmente:</strong>
               <ul class="lista-avaliacao">
                 <li>Cabeça;</li>
@@ -105,16 +123,22 @@ export const abordagemSecundaria = {
                 <li>Extremidades inferiores;</li>
                 <li>Exame neurológico, nova avaliação de Gasglow e foto-reatividade pupilar.</li>
               </ul>
+          </div>
 
-            <img src="images/abordagem-secundaria/exame-cefalo-podal.png" alt="Exame Céfalo Podal">
+          <div class="img-materia-container">
+              <img src="images/abordagem-secundaria/exame-cefalo-podal.png" alt="Exame Céfalo Podal">
+          </div>   
 
-        <h3>Abordagem Secundária - SSVV</h3>
-            <p>
+        <h3 class="titulo-h3">Abordagem Secundária - SSVV</h3>
+        <div class="text-content">
+           <p>
               A avaliação dos sinais vitais, faz parte da abordagem secundária ao paciente, onde deve
               ser aferido os sinais vitais da vítima, assim como sinais auxiliares.
             </p>
-
-            <strong>São eles:</strong>
+        </div>
+        
+        <div class="lista-ul">
+        <strong>São eles:</strong>
               <ul class="lista-ssvv">
                 <li><strong>Frequência Cardíaca (FC):</strong> 60 a 100 Batimentos por minuto (BPM);</li>
                 <li><strong>Frequência Respiratória (FR):</strong> 12 a 20 Incursões respiratórias por minuto (IRPM);</li>
@@ -124,53 +148,56 @@ export const abordagemSecundaria = {
                 <li><strong>Saturação de Oxigênio (Sat O2):</strong>95% à 99% de saturação de oxigênio (SatO2);</li>
                 <li><strong>Glicemia Capilar (HGT ou Dextro):</strong> Entre 70 e 180 miligramas por decilitro (mg/dl).</li>
               </ul>
+        </div>
 
-            <img src="images/abordagem-secundaria/abordagem-ssvv.png" alt="Avaliação de Sinais Vitais">
+        <div class="img-materia-container">
+          <img src="images/abordagem-secundaria/abordagem-ssvv.png" alt="Avaliação de Sinais Vitais">
+        </div>
+        <div class="espaco-pdf"></div>
 
-            <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
-              <div style="margin-top: 2rem;">
-                <a href="#" class="btn-simulado" data-simulado="abordagem-secundaria">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                  <path d="m9 14 2 2 4-4"></path>
-                </svg>
-                Simulado Abordagem Secundária
-                </a>
-              </div>
+        <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
+        <div class="img-materia-container">
+          <a href="#" class="btn-simulado" data-simulado="abordagem-secundaria">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="m9 14 2 2 4-4"></path>
+            </svg>
+            Simulado Abordagem Secundária
+          </a>
+        </div>
+        <div class="espaco-pdf"></div>
+        
+        <!--BLOCO: REFERÊNCIAS-->
+        <section class="pdf-block">
+          <div class="referencias-container">  
+            <h3>Referências</h3>
+              <ul class="lista-referencias">
+                <li>
+                  National Association Of Emergency Medical Technicians U.S, American College Of Surgeons.
+                  Advanced Medical Life Support Committee. AMLS: Advanced medical life support. Burlington,
+                  Ma: Jones & Bartlett Learning; 2021.
+                </li>
+              
+                <li>
+                  National Association Of Emergency Medical Technicians U.S, American College Of Surgeons.
+                  Committee On Trauma. ATLS : Advanced trauma life support. Burlington, Ma: Jones & Bartlett
+                  Learning; 2018.
+                </li>
 
-      <!--BLOCO: REFERÊNCIAS-->
-      <section class="pdf-block">
+                <li>
+                  Ministério da Saúde, Protocolos de Suporte Básico de Vida. 2014 Available from:
+                  <a href="https://bvsms.saude.gov.br/bvs/publicacoes/protocolo_suporte_basico_vida.pdf" target="_blank" rel="noopner noreferrer">https://bvsms.saude.gov.br/bvs/publicacoes/protocolo_suporte_basico_vida.pdf</a>
+                </li>
 
-        <h3>Referências</h3>
-          <ul class="lista-referencias">
-            <li>
-              National Association Of Emergency Medical Technicians U.S, American College Of Surgeons.
-              Advanced Medical Life Support Committee. AMLS: Advanced medical life support. Burlington,
-              Ma: Jones & Bartlett Learning; 2021.
-            </li>
-
-            <li>
-              National Association Of Emergency Medical Technicians U.S, American College Of Surgeons.
-              Committee On Trauma. ATLS : Advanced trauma life support. Burlington, Ma: Jones & Bartlett
-              Learning; 2018.
-            </li>
-
-            <li>
-              Ministério da Saúde, Protocolos de Suporte Básico de Vida. 2014 Available from:
-              <a href="https://bvsms.saude.gov.br/bvs/publicacoes/protocolo_suporte_basico_vida.pdf" target="_blank" rel="noopner noreferrer">https://bvsms.saude.gov.br/bvs/publicacoes/protocolo_suporte_basico_vida.pdf</a>
-            </li>
-            
-            <li>
-              Wilberger JE, Mao G. Trauma cranioencefálico (TCE) [Internet]. Manuais MSD edição para profissionais.
-              Manuais MSD; 2019. Available from:
-              <a href="https://www.msdmanuals.com/pt-br/profissional/les%C3%B5es-intoxica%C3%A7%C3%A3o/trauma-cranioencef%C3%A1lico-tce/trauma-cranioencef%C3%A1lico-tce" target="_blank" rel="noopner noreferrer">https://www.msdmanuals.com/pt-br/profissional/les%C3%B5es-intoxica%C3%A7%C3%A3o/trauma-cranioencef%C3%A1lico-tce/trauma-cranioencef%C3%A1lico-tce</a>
-            </li>
-                
-                
-          </ul>
-
-      
+                <li>
+                  Wilberger JE, Mao G. Trauma cranioencefálico (TCE) [Internet]. Manuais MSD edição para profissionais.
+                  Manuais MSD; 2019. Available from:
+                  <a href="https://www.msdmanuals.com/pt-br/profissional/les%C3%B5es-intoxica%C3%A7%C3%A3o/trauma-cranioencef%C3%A1lico-tce/trauma-cranioencef%C3%A1lico-tce" target="_blank" rel="noopner noreferrer">https://www.msdmanuals.com/pt-br/profissional/les%C3%B5es-intoxica%C3%A7%C3%A3o/trauma-cranioencef%C3%A1lico-tce/trauma-cranioencef%C3%A1lico-tce</a>
+                </li>
+              </ul>
+          </div>
+ 
       </section>
     
     `,

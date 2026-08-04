@@ -13,6 +13,9 @@
         </ul>
 </section>
 
+<h3 class="titulo-h3"></h3>
+<div class="texto-content"></div>
+
 <!-- BOTÃO DO SIMULADO DA MATÉRIA -->
 <div style="margin-top: 2rem;">
   <a href="#" class="btn-simulado" data-simulado="alfabeto-fonetico">
@@ -24,3 +27,5 @@
     Realizar Simulado Alfabeto Fonético
   </a>
 </div>
+
+<div class="espaco-pdf"></div>

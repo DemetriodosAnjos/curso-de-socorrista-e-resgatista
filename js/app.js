@@ -58,6 +58,7 @@ const contentTitle = document.getElementById("content-title");
 const contentBody = document.getElementById("content-body");
 
 // Botões de Ação
+const contentActions = document.getElementById("content-actions");
 const downloadLink = document.getElementById("download-link");
 const shareBtn = document.getElementById("share-btn");
 
@@ -196,22 +197,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ==========================================================
       4. CONTROLE DO MENU RESPONSIVO (HAMBÚRGUER / GAVETA MOBILE)
-      ========================================================== */
+   ========================================================== */
 
 /**
  * Abre a sidebar no mobile e ativa a camada de esmaecimento do fundo
  */
 function abrirSidebar() {
-  if (sidebar) sidebar.classList.add("active");
-  if (overlaySidebar) overlaySidebar.classList.add("active");
+  if (sidebar) sidebar.classList.add("is-open");
+  if (overlaySidebar) overlaySidebar.classList.add("is-active");
 }
 
 /**
  * Fecha a sidebar no mobile e remove o esmaecimento do fundo
  */
 function fecharSidebar() {
-  if (sidebar) sidebar.classList.remove("active");
-  if (overlaySidebar) overlaySidebar.classList.remove("active");
+  if (sidebar) sidebar.classList.remove("is-open");
+  if (overlaySidebar) overlaySidebar.classList.remove("is-active");
 }
 
 // Event Listeners para acionamento do Menu Hambúrguer e Overlay
@@ -221,14 +222,14 @@ if (overlaySidebar) overlaySidebar.addEventListener("click", fecharSidebar);
 
 // Tecla ESC fecha o menu mobile se estiver aberto
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && sidebar?.classList.contains("active")) {
+  if (e.key === "Escape" && sidebar?.classList.contains("is-open")) {
     fecharSidebar();
   }
 });
 
 /* ==========================================================
       5. RENDERIZAÇÃO DO MENU LATERAL DINÂMICO
-      ========================================================== */
+   ========================================================== */
 if (menuList) {
   menuList.innerHTML = "";
 
@@ -238,13 +239,25 @@ if (menuList) {
 
     const li = document.createElement("li");
     const button = document.createElement("button");
+
     button.textContent = materia.titulo || key;
     button.classList.add("menu-item-btn");
 
+    // 1. Identificador fundamental no DOM para a busca da classe .active
+    button.dataset.key = key;
+
     button.addEventListener("click", () => {
+      // 2. Limpa active de todos e ativa apenas o clicado
+      menuList
+        .querySelectorAll("button, li")
+        .forEach((el) => el.classList.remove("active"));
+      button.classList.add("active");
+      li.classList.add("active");
+
+      // 3. Executa a carga da matéria (mantido intacto)
       carregarMateria(key);
 
-      // Fecha a gaveta no mobile após selecionar uma matéria
+      // 4. Fecha a gaveta no mobile (mantido intacto)
       if (window.innerWidth <= 1024) {
         fecharSidebar();
       }
@@ -256,8 +269,8 @@ if (menuList) {
 }
 
 /* ==========================================================
-      6. CARREGAMENTO DE CONTEÚDO NA TELA
-      ========================================================== */
+   6. CARREGAMENTO DE CONTEÚDO NA TELA
+   ========================================================== */
 function carregarMateria(id) {
   const materia = materiasData[id];
   if (!materia) return;
@@ -270,44 +283,61 @@ function carregarMateria(id) {
   const professorInfo = materia.professores || "Não informado";
 
   const blocoCabecalhoETitulo = `
-       <!-- Cabeçalho Institucional para Leitura e PDF -->
-       <div class="pdf-header" style="border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 15px;">
-         <h3 style="margin: 0; font-size: 1.1rem; color: #222; font-weight: 700;">
-           UNITEC - Curso para Socorristas e Resgatistas 2026
-         </h3>
-         <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #666;">
-           <strong>Turma:</strong> ${turmaInfo} &nbsp;|&nbsp; 
-           <strong>Professor:</strong> ${professorInfo}
-         </p>
-       </div>
-   
-       <!-- Título Principal da Matéria -->
-       <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">
-         ${materia.titulo}
-       </h2>
-     `;
+        <!-- Cabeçalho Institucional para Leitura e PDF -->
+        <div class="pdf-header" style="border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 15px;">
+          <h3 style="margin: 0; font-size: 1.1rem; color: #222; font-weight: 700;">
+            UNITEC - Curso para Socorristas e Resgatistas 2026
+          </h3>
+          <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #666;">
+            <strong>Turma:</strong> ${turmaInfo} &nbsp;|&nbsp; 
+            <strong>Professor:</strong> ${professorInfo}
+          </p>
+        </div>
+      
+        <!-- Título Principal da Matéria -->
+        <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">
+          ${materia.titulo}
+        </h2>
+      `;
 
   if (contentBody) {
     contentBody.innerHTML = blocoCabecalhoETitulo + (materia.corpo || "");
   }
 
-  // Revelar botões de ação após carregar o conteúdo
-  if (downloadLink) {
-    downloadLink.removeAttribute("hidden");
-    downloadLink.style.display = "inline-flex";
-  }
+  // REVELAR AÇÕES E BOTÕES FLUTUANTES (FABs)
+  if (contentActions) contentActions.classList.remove("is-hidden");
+  if (downloadLink) downloadLink.removeAttribute("hidden");
+  if (shareBtn) shareBtn.removeAttribute("hidden");
 
-  if (shareBtn) {
-    shareBtn.removeAttribute("hidden");
-    shareBtn.style.display = "inline-flex";
-  }
-
-  // Atualizar a URL com a matéria ativa sem recarregar a página
+  // ATUALIZAR A URL
   window.history.pushState(
     null,
     materia.titulo,
     `?materia=${materia.slug || id}`,
   );
+
+  // ==========================================================
+  // ATIVAÇÃO DO BOTÃO NA SIDEBAR
+  // ==========================================================
+  // 1. Limpa o estado ativo de todos os botões e LIs do menu
+  const todosOsItens = document.querySelectorAll(
+    "#menu-list button, #menu-list li",
+  );
+  todosOsItens.forEach((el) => el.classList.remove("active"));
+
+  // 2. Busca o botão pelo data-key (ou atributos alternativos de contrato)
+  const botaoAlvo = document.querySelector(
+    `#menu-list button[data-key="${id}"], #menu-list [data-materia="${id}"], #menu-list [data-slug="${materia.slug || id}"]`,
+  );
+
+  // 3. Aplica a classe active diretamente no botão e no <li> pai
+  if (botaoAlvo) {
+    botaoAlvo.classList.add("active");
+    const liPai = botaoAlvo.closest("li");
+    if (liPai) {
+      liPai.classList.add("active");
+    }
+  }
 }
 
 /* ==========================================================

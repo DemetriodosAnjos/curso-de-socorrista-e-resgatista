@@ -1,0 +1,539 @@
+/* ==========================================================
+   1. VARIÁVEIS E RESET
+   ========================================================== */
+:root {
+  --primary-color: #0c3d6d;
+  --text-color: #333;
+  --bg-color: #f5f5f5;
+  --sidebar-bg: #fff;
+  --border-color: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Trava a altura em 100% da viewport */
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.6;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Mantém o layout de app (sem scroll no body em desktop) */
+}
+
+/* ==========================================================
+       2. HEADER E LAYOUT PRINCIPAL
+       ========================================================== */
+.main-header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.main-header h1 {
+  font-size: 1.5rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ==========================================================
+       3. SIDEBAR / MENU LATERAL (BASE DESKTOP)
+       ========================================================== */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.menu-item-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.menu-item-btn:hover {
+  background-color: #f0f0f0;
+  color: var(--primary-color);
+}
+
+/* Escondidos por padrão no Desktop */
+.hamburger-btn,
+.close-sidebar-btn,
+.sidebar-overlay {
+  display: none;
+}
+
+/* ==========================================================
+       4. ÁREA DE CONTEÚDO
+       ========================================================== */
+.content-area {
+  height: 100%;
+  overflow-y: auto; /* Mantém a rolagem ativa na área inteira */
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0; /* IMPRESCINDÍVEL para o Flexbox não travar o scroll interno */
+}
+
+/* Título principal do artigo */
+#content-article h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Estilização e espaçamentos do corpo do conteúdo */
+#content-body {
+  flex: 1; /* Ocupa o espaço extra antes dos botões de ação */
+}
+
+#content-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#content-body h2,
+#content-body h2.titulo-materia {
+  font-size: 1.75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color) !important;
+}
+
+#content-body h3 {
+  margin: 1.5rem 0 0.5rem 0;
+  color: var(--primary-color);
+}
+
+#content-body p {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+#content-body ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Espaçamento relativo quando uma imagem antecede um parágrafo */
+#content-body img + p {
+  margin-top: 1.5rem;
+}
+
+/* Botões de Ação */
+.content-actions {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 1rem;
+}
+
+.btn,
+.btn-simulado {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  border: none;
+}
+
+.btn-simulado-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-download,
+.btn-simulado {
+  color: #fff;
+  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/*Ícone btn download*/
+.hrfn3y {
+  fill: currentColor;
+  d: path(
+    "m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+  );
+}
+
+.btn-share {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: transparent;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/*Ícone btn compartilhar*/
+.u8r-wt {
+  fill: currentColor;
+  d: path(
+    "M17 22q-1.25 0-2.125-.875T14 19q0-.15.075-.7L7.05 14.2q-.4.375-.925.588T5 15q-1.25 0-2.125-.875T2 12t.875-2.125T5 9q.6 0 1.125.213t.925.587l7.025-4.1q-.05-.175-.062-.337T14 5q0-1.25.875-2.125T17 2t2.125.875T20 5t-.875 2.125T17 8q-.6 0-1.125-.213T14.95 7.2l-7.025 4.1q.05.175.063.338T8 12t-.012.363t-.063.337l7.025 4.1q.4-.375.925-.587T17 16q1.25 0 2.125.875T20 19t-.875 2.125T17 22"
+  );
+  transition: fill 0.2s ease; /* Transição suave de cor */
+}
+
+.btn-download:hover,
+.btn-simulado:hover {
+  border: 2px solid #018dca;
+  background-color: #018dca;
+  color: #fff;
+}
+
+.btn-share:hover {
+  border: 2px solid #018dca;
+  background-color: transparent;
+  color: #018dca;
+}
+
+.btn-download:active,
+.btn-simulado:active,
+.btn-share:active {
+  transform: translateY(1px);
+}
+
+.referencias-container {
+  margin-top: 3rem;
+}
+
+/* Footer / Créditos */
+.footer-credits {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.credits-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.credits-info strong {
+  color: var(--text-color);
+}
+
+.social-contacts {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-title {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.social-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #eee;
+  color: #555;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.social-btn.instagram:hover {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+}
+
+.social-btn.whatsapp:hover {
+  background-color: #25d366;
+}
+
+/* Botão Visualizar PDF (Provisório) */
+.btn-visualizar {
+  color: #333;
+  background-color: transparent;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-visualizar:hover {
+  color: #018dca;
+}
+
+/*Ícone visualizar*/
+.n1lsfm {
+  fill: currentColor;
+  fill-rule: evenodd;
+}
+
+.wxzl2v {
+  d: path(
+    "M12 8.25a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0"
+  );
+}
+
+.zlqivz {
+  d: path(
+    "M12 3.25c-4.514 0-7.555 2.704-9.32 4.997l-.031.041c-.4.519-.767.996-1.016 1.56c-.267.605-.383 1.264-.383 2.152s.116 1.547.383 2.152c.25.564.617 1.042 1.016 1.56l.032.041C4.445 18.046 7.486 20.75 12 20.75s7.555-2.704 9.32-4.997l.031-.041c.4-.518.767-.996 1.016-1.56c.267-.605.383-1.264.383-2.152s-.116-1.547-.383-2.152c-.25-.564-.617-1.041-1.016-1.56l-.032-.041C19.555 5.954 16.514 3.25 12 3.25M3.87 9.162C5.498 7.045 8.15 4.75 12 4.75s6.501 2.295 8.13 4.412c.44.57.696.91.865 1.292c.158.358.255.795.255 1.546s-.097 1.188-.255 1.546c-.169.382-.426.722-.864 1.292C18.5 16.955 15.85 19.25 12 19.25s-6.501-2.295-8.13-4.412c-.44-.57-.696-.91-.865-1.292c-.158-.358-.255-.795-.255-1.546s.097-1.188.255-1.546c.169-.382.426-.722.864-1.292"
+  );
+}
+
+/* ==========================================================
+       5. COMPONENTES UTILITÁRIOS (PDF OVERLAY & SPINNER)
+       ========================================================== */
+.pdf-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.pdf-loading-card {
+  background: #ffffff;
+  padding: 24px 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pdf-loading-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+.pdf-spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #e0e0e0;
+  border-top-color: #25d366;
+  border-radius: 50%;
+  animation: pdf-spin 0.8s linear infinite;
+}
+
+@keyframes pdf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================
+       6. CONTROLE DE QUEBRA DE PÁGINA PARA O PDF
+       ========================================================== */
+.pdf-block,
+#content-article img,
+#content-article figure,
+#content-article table,
+#content-article tr,
+#content-article .tabela-doacao-container,
+#content-article .infografico-container,
+#content-article blockquote {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+#content-article h1,
+#content-article h2,
+#content-article h3,
+#content-article h4 {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+/* ==========================================================
+       7. RESPONSIVIDADE (MOBILE & TABLET - ATÉ 1024px)
+       ========================================================== */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  /* Botão Hambúrguer */
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 100;
+  }
+
+  .hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  /* Sidebar Gaveta Flutuante */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    border-right: none;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .close-sidebar-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+  }
+
+  /* Overlay de esmaecimento do fundo */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .content-area {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-credits {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .content-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
