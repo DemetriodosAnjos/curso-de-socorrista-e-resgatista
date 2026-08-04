@@ -17,6 +17,7 @@ import { simuladoAlfabetoFonetico } from "./data/simulado-alfabeto-fonetico.js";
 import { simuladoAbordagemPrimaria } from "./data/simulado-abordagem-primaria.js";
 import { simuladoAbordagemSecundaria } from "./data/simulado-abordagem-secundaria.js";
 import { simuladoCodigoQ } from "./data/simulado-codigo-q.js";
+import { simuladoEscalaGasglow } from "./data/simulado-escala-gasglow.js";
 
 /* ==========================================================
       2. AGRUPADOR CENTRAL DE DADOS
@@ -41,6 +42,7 @@ const simuladosMap = {
   "abordagem-primaria": simuladoAbordagemPrimaria,
   "abordagem-secundaria": simuladoAbordagemSecundaria,
   "codigo-q": simuladoCodigoQ,
+  "escala-gasglow": simuladoEscalaGasglow,
 };
 
 /* ==========================================================

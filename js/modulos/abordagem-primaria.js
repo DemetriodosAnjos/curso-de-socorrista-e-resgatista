@@ -53,7 +53,7 @@ export const abordagemPrimaria = {
           <!--BLOCO 2: X - Hemorragias Exsanguinantes -->
           <section class="pdf-block">
 
-            <div style="page-break-before: always; break-before: page;"></div>;
+            <div style="page-break-before: always; break-before: page;"></div>
             <div class="text-content">
               <p>
                 Levando em consideração que atuaremos no <strong>X</strong>' em primeiro lugar, devemos inicialmente
@@ -86,7 +86,7 @@ export const abordagemPrimaria = {
                 onde este ainda não possui risco de promover necrose tecidual.
               </p>
             </div>
-            <div style="page-break-before: always; break-before: page;"></div>;
+            <div style="page-break-before: always; break-before: page;"></div>
             
             <div class="img-materia-container">
               <img src="images/abordagem-primaria/stop-the-bleed.png" alt="Protocolo Stop The Bleed">
@@ -322,8 +322,6 @@ export const abordagemPrimaria = {
               </p>
             </div>
             
-            <div class="text-content"> 
-  
             <div class="lista-ul">
               <ul class="lista-avaliacao-pupilar">
                 <strong>DICA:</strong> Para memorizar,
@@ -342,7 +340,68 @@ export const abordagemPrimaria = {
                 rápida do estado neurológico.
               </p>
             </div>
-  
+
+            <div class="espaco-pdf"></div>
+            <div class="lista-ul">
+              <strong>Abertura Ocular (AO) 1 a 4 pontos</strong>
+              <ul class="abertura-ocular">
+                <li><strong>4 pontos:</strong> Espontânea (olhos abertos sem necessidade de estímulo);</li>
+                <li><strong>3 pontos:</strong> Ao som / comando verbal;</li>
+                <li><strong>2 pontos;</strong> À pressão / estímulo doloroso (ex: leito ungueal ou incisura supraorbital);</li>
+                <li><strong>1 ponto:</strong> Ausente (não abre os olhos diante de nenhum estímulo);</li>
+                <li><strong>NT:</strong> Não testável (ex: edema palpebral severo).</li>
+              </ul>
+            </div>
+
+            <div class="lista-ul">
+              <strong>Resposta Verbal (RV) 1 a 5 pontos</strong>
+              <ul class="resposta-verbal">
+                <li><strong>5 pontos:</strong> Orientado (sabe quem é, onde está e o ano/mês correto);</li>
+                <li><strong>4 pontos:</strong> Confuso (fala frases coerentes, mas demonstra desorientação);</li>
+                <li><strong>3 pontos:</strong> Palavras inadequadas (fala palavras soltas e desconexas);</li>
+                <li><strong>2 pontos:</strong> Sons incompreensíveis (emite apenas gemidos ou ruídos);</li>
+                <li><strong>1 ponto:</strong> Ausente (nenhuma resposta vocal);</li>
+                <li><strong>NT:</strong> Não testável (ex: paciente intubado ou com traqueostomia).</li>
+              </ul>
+            </div>
+
+            <div class="lista-ul">
+              <strong>Resposta Motora (RM) — 1 a 6 pontos</strong>
+              <ul class="resposta-motora">
+                <li><strong>6 pontos:</strong> Obedece a ordens simples (ex: "aperte minha mão", "mostre a língua");</li>
+                <li><strong>5 pontos:</strong> Localiza o estímulo doloroso (eleva a mão acima da clavícula ao estímulo);</li>
+                <li><strong>4 pontos:</strong> Flexão normal / retirada (dobra o cotovelo rapidamente sem padrão anormal);</li>
+                <li><strong>3 pontos:</strong> Flexão anormal / Decorticação (rigidez, braços flexionados no tórax e punhos fechados);</li>
+                <li><strong>2 pontos:</strong> Extensão / Descerebração (braços estendidos, hiperpronados e pernas rígidas);</li>
+                <li><strong>1 ponto:</strong> Ausente (nenhuma resposta motora ao estímulo);</li>
+                <li><strong>NT:</strong> Não testável (ex: paralisia muscular por fármacos ou lesão medular prévia).</li>
+              </ul>
+            </div>
+
+            <div class="lista-ul">
+              <strong>Reatividade Pupilar (ECG-P)</strong>
+              <p>Na atualização da escala (Glasgow com Reatividade Pupilar), avalia-se a resposta das pupilas à luz para ajustar o escore final:</p>
+              <ul class="resposta-motora">
+                <li><strong>Ambas as pupilas reagem à luz:</strong> 0 pontos;</li>
+                <li><strong>Apenas uma pupila reage à luz:</strong> -1 ponto;</li>
+                <li><strong>Nenhuma pupila reage à luz:</strong> -2 pontos.</li>
+              </ul>
+            </div>
+
+            <div class="lista-ul">
+              <strong>Classificação do Traumatismo Cranioencefálico (TCE)</strong>
+              <p>Na atualização da escala (Glasgow com Reatividade Pupilar), avalia-se a resposta das pupilas à luz para ajustar o escore final:</p>
+              <ul class="resposta-motora">
+                <li><strong>Leve:</strong> 13 a 15 pontos;</li>
+                <li><strong>Moderado:</strong> 9 a 12 ponto;</li>
+                <li><strong>Grave:</strong> 3 a 8 pontos (geralmente sinaliza necessidade de proteção de via aérea / intubação).</li>
+              </ul>
+            </div>
+
+            <div class="img-materia-container">
+              <img src="images/abordagem-primaria/escala-gasglow.png" alt="EScala de Gasglow">
+            </div>
+
             <h3 class="titulo-h3">E - Exposição e Controle de Ambiente</h3>
   
             <div class="text-content">
@@ -356,8 +415,12 @@ export const abordagemPrimaria = {
                 exposição pode indiretamente promover uma hipotermia. São utilizados cobertores e mantas térmicas para
                 aquecer o paciente.
               </p>
-            </div>
-              
+            </div>  
+        </section>
+        <div style="page-break-before: always; break-before: page;"></div>
+
+        <!--BLOCO  -->
+        <section class="pdf-block">
             <div class="img-materia-container">
               <img src="images/abordagem-primaria/exposicao-controle.png" alt="Exposição e Controle do ambiente">
             </div>
@@ -372,9 +435,20 @@ export const abordagemPrimaria = {
                 </svg>
                  Simulado Abordagem Primária
                </a>
+
+               <a href="#" class="btn-simulado" data-simulado="escala-gasglow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  <path d="m9 14 2 2 4-4"></path>
+                </svg>
+                 Simulado Escala de Gasglow
+               </a>
             </div>
-            <div style="page-break-before: always; break-before: page;"></div>;
-  
+          </section>
+
+          <!--BLOCO  -->
+          <section class="pdf-block">
             <div class="referencias-container">
                <h3 class="titulo-h3">Referências</h3>
                 <ul class="Lista-de-referencias">
@@ -386,6 +460,7 @@ export const abordagemPrimaria = {
                 </ul>
             </div>
           </section>
+         
 
       `,
 };
