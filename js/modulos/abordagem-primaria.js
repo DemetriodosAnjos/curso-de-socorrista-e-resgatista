@@ -133,7 +133,7 @@ export const abordagemPrimaria = {
                 <li>Rolamento do paciente.</li>
               </ul>
             </div>
-            <div style="page-break-before: always; break-before: page;"></div>;
+            <div style="page-break-before: always; break-before: page;"></div>
                       
           </section>
             
