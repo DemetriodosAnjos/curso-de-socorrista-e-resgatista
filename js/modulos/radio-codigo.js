@@ -32,7 +32,7 @@ export const radioCodigo = {
             </div>
                    
             <div class="img-materia-container">
-                <img src="images/abordagem-radio-codigo/radio-ambulancia.png" alt="Radio comunicador">
+                <img src="images/radio-codigo/radio-ambulancia.png" alt="Radio comunicador">
             </div>
                 
             <div style="page-break-before: always; break-before: page;"></div>
@@ -57,7 +57,7 @@ export const radioCodigo = {
             </div>
                 
             <div class="img-materia-container">
-                <img src="images/abordagem-radio-codigo/alfabeto-fonetico.png" alt="Alfabeto Fonético">
+                <img src="images/radio-codigo/alfabeto-fonetico.png" alt="Alfabeto Fonético">
             </div>
                 
             <h3 class="titulo-h3">Números Fonéticos</h3>
@@ -86,7 +86,7 @@ export const radioCodigo = {
             </div>    
             
             <div class="img-materia-container">
-                <img src="images/abordagem-radio-codigo/codigo-q.png" alt="Radio Código Q">
+                <img src="images/radio-codigo/codigo-q.png" alt="Radio Código Q">
             </div>
 
             <div class="lista-ul">

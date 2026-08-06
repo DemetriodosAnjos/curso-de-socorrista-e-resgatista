@@ -1,6 +1,7 @@
 /* ==========================================================
-   1. IMPORTAÇÕES DE MÓDULOS DE CONTEÚDO
-   ========================================================== */
+      IMPORT MATERIAS
+      ========================================================== */
+
 import { anatomiaHumanaBasica } from "./modulos/anatomia-humana-basica.js";
 import { abordagemPrimaria } from "./modulos/abordagem-primaria.js";
 import { radioCodigo } from "./modulos/radio-codigo.js";
@@ -10,8 +11,7 @@ import { biosegurancaEticaAnatomia } from "./modulos/bioseguranca-etica-anatomia
 import { eticaBioetica } from "./modulos/etica-bioetica.js";
 import { historiaAph } from "./modulos/historia-aph.js";
 
-// Importações do Simulado
-import { initSimulado } from "./simulado-engine.js";
+// 2. Imports dos Simulados
 import { simuladoBioetica } from "./data/simulado-bioetica.js";
 import { simuladoAlfabetoFonetico } from "./data/simulado-alfabeto-fonetico.js";
 import { simuladoAbordagemPrimaria } from "./data/simulado-abordagem-primaria.js";
@@ -19,8 +19,10 @@ import { simuladoAbordagemSecundaria } from "./data/simulado-abordagem-secundari
 import { simuladoCodigoQ } from "./data/simulado-codigo-q.js";
 import { simuladoEscalaGasglow } from "./data/simulado-escala-gasglow.js";
 
+import { initSidebar, initSimulado } from "./data/sidebar.js";
+
 /* ==========================================================
-      2. AGRUPADOR CENTRAL DE DADOS
+      AGRUPADOR CENTRAL DE DADOS
       ========================================================== */
 const materiasData = {
   "radio-codigo": radioCodigo,
@@ -37,12 +39,12 @@ const materiasData = {
       2.1 MAPEAMENTO DOS SIMULADOS
    ========================================================== */
 const simuladosMap = {
-  "etica-bioetica": simuladoBioetica,
+  "codigo-q": simuladoCodigoQ,
+  "escala-gasglow": simuladoEscalaGasglow,
   "alfabeto-fonetico": simuladoAlfabetoFonetico,
   "abordagem-primaria": simuladoAbordagemPrimaria,
   "abordagem-secundaria": simuladoAbordagemSecundaria,
-  "codigo-q": simuladoCodigoQ,
-  "escala-gasglow": simuladoEscalaGasglow,
+  //"etica-bioetica": simuladoBioetica,
 };
 
 /* ==========================================================
@@ -66,6 +68,82 @@ const shareBtn = document.getElementById("share-btn");
 
 // Estado Global da Aplicação
 let materiaAtiva = null;
+
+/* ==========================================================
+     INICIALIZAÇÃO DO DOM
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  // Define o estado inicial correto dos FABs ao carregar a página
+  atualizarEstadoFABs("home");
+
+  initSidebar({
+    materias: materiasData,
+    simulados: simuladosMap,
+    onSelect: async ({ key, type }) => {
+      if (type === "home") {
+        // Limpa os parâmetros da URL (remove o ?materia=...)
+        window.history.pushState({}, "", window.location.pathname);
+
+        // Atualiza os FABs para o estado da Home
+        atualizarEstadoFABs("home");
+
+        if (!document.getElementById("home-css")) {
+          const link = document.createElement("link");
+          link.id = "home-css";
+          link.rel = "stylesheet";
+          link.href = "css/home.css";
+          document.head.appendChild(link);
+        }
+
+        const { initHome } = await import("./data/home.js");
+        const contentBody = document.getElementById("content-body");
+        initHome(contentBody);
+      } else if (type === "materia") {
+        carregarMateria(key);
+      } else if (type === "simulado") {
+        const contratoSimulado = simuladosMap[key];
+        if (contratoSimulado && typeof initSimulado === "function") {
+          initSimulado(contratoSimulado);
+        }
+      }
+
+      if (window.innerWidth <= 1024) fecharSidebar();
+    },
+  });
+});
+
+// Delegação global de cliques para os cards recentes na Home
+document.addEventListener("click", (e) => {
+  const btnRecente = e.target.closest(
+    ".materia-recente-card, .home-btn-continuar-estudo",
+  );
+  if (!btnRecente) return;
+
+  const key = btnRecente.dataset.key;
+  if (key && typeof carregarMateria === "function") {
+    carregarMateria(key);
+  }
+});
+
+/* ==========================================================
+       FUNÇÃO ESTADO FABs
+       ========================================================== */
+function atualizarEstadoFABs(modo) {
+  // Padronizado para usar IDs consistentes com o seu HTML
+  const btnVisualizar = document.getElementById("visualizar");
+  const btnDownload = document.getElementById("download-link");
+  const btnShare = document.getElementById("share-btn");
+
+  if (modo === "home") {
+    if (btnVisualizar) btnVisualizar.style.display = "none"; // Oculto na Home
+    if (btnDownload) btnDownload.style.display = "none"; // Oculto na Home
+    if (btnShare) btnShare.style.display = "flex"; // Visível na Home
+  } else if (modo === "materia") {
+    if (btnVisualizar) btnVisualizar.style.display = "flex";
+    if (btnDownload) btnDownload.style.display = "flex";
+    if (btnShare) btnShare.style.display = "flex";
+  }
+}
 
 /* ==========================================================
       FUNÇÃO VISUALIZAR PDF (PROVISORIA)
@@ -230,47 +308,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* ==========================================================
-      5. RENDERIZAÇÃO DO MENU LATERAL DINÂMICO
-   ========================================================== */
-if (menuList) {
-  menuList.innerHTML = "";
-
-  Object.keys(materiasData).forEach((key) => {
-    const materia = materiasData[key];
-    if (!materia) return;
-
-    const li = document.createElement("li");
-    const button = document.createElement("button");
-
-    button.textContent = materia.titulo || key;
-    button.classList.add("menu-item-btn");
-
-    // 1. Identificador fundamental no DOM para a busca da classe .active
-    button.dataset.key = key;
-
-    button.addEventListener("click", () => {
-      // 2. Limpa active de todos e ativa apenas o clicado
-      menuList
-        .querySelectorAll("button, li")
-        .forEach((el) => el.classList.remove("active"));
-      button.classList.add("active");
-      li.classList.add("active");
-
-      // 3. Executa a carga da matéria (mantido intacto)
-      carregarMateria(key);
-
-      // 4. Fecha a gaveta no mobile (mantido intacto)
-      if (window.innerWidth <= 1024) {
-        fecharSidebar();
-      }
-    });
-
-    li.appendChild(button);
-    menuList.appendChild(li);
-  });
-}
-
-/* ==========================================================
    6. CARREGAMENTO DE CONTEÚDO NA TELA
    ========================================================== */
 function carregarMateria(id) {
@@ -278,6 +315,37 @@ function carregarMateria(id) {
   if (!materia) return;
 
   materiaAtiva = materia;
+  atualizarEstadoFABs("materia");
+
+  // ==========================================
+  // SALVAR NO LOCALSTORAGE (ÚLTIMAS MATÉRIAS)
+  // ==========================================
+  try {
+    const historicoSalvo =
+      JSON.parse(localStorage.getItem("ultimasMaterias")) || [];
+
+    // Cria o objeto resumido da matéria atual
+    const novaMateriaHistorico = {
+      key: id,
+      titulo: materia.titulo,
+      turma: materia.turma || "Soc16",
+      dataAcesso: new Date().toISOString(),
+    };
+
+    // Remove se já existir (para evitar duplicadas) e coloca no topo
+    const historicoAtualizado = [
+      novaMateriaHistorico,
+      ...historicoSalvo.filter((item) => item.key !== id),
+    ].slice(0, 3); // Mantém apenas as 3 últimas
+
+    localStorage.setItem(
+      "ultimasMaterias",
+      JSON.stringify(historicoAtualizado),
+    );
+  } catch (e) {
+    console.error("Erro ao salvar no localStorage:", e);
+  }
+  // ==========================================
 
   if (contentTitle) contentTitle.textContent = "";
 
@@ -542,14 +610,28 @@ if (materiaParam) {
   const keyEncontrada = Object.keys(materiasData).find(
     (key) => materiasData[key]?.slug === materiaParam || key === materiaParam,
   );
-  if (keyEncontrada) carregarMateria(keyEncontrada);
-}
+  if (keyEncontrada) {
+    carregarMateria(keyEncontrada);
+  }
+} else {
+  // Se não houver matéria na URL, carrega a Home automaticamente ao iniciar
+  (async () => {
+    if (!document.getElementById("home-css")) {
+      const link = document.createElement("link");
+      link.id = "home-css";
+      link.rel = "stylesheet";
+      link.href = "css/home.css";
+      document.head.appendChild(link);
+    }
 
+    const { initHome } = await import("./data/home.js");
+    const contentBody = document.getElementById("content-body");
+    initHome(contentBody);
+  })();
+}
 /* ==========================================================
    10. CONTROLE DO SIMULADO (DELEGAÇÃO DE EVENTO)
    ========================================================== */
-
-// Captura cliques em botões de simulado injetados dinamicamente no corpo da matéria
 document.addEventListener("click", (event) => {
   const btnSimulado = event.target.closest(".btn-simulado");
 
@@ -561,11 +643,9 @@ document.addEventListener("click", (event) => {
   const contratoSimulado = simuladosMap[simuladoSlug];
 
   if (contratoSimulado) {
-    console.log("Iniciando simulado com o contrato:", contratoSimulado);
-
     try {
-      initSimulado(contratoSimulado);
-      console.log("initSimulado executada sem erros lançados.");
+      // Passa o contrato e o container principal do app
+      initSimulado(contratoSimulado, contentBody);
     } catch (error) {
       console.error("Erro crítico dentro de initSimulado:", error);
     }

@@ -1,0 +1,568 @@
+/* =================================================_
+   HOME.CSS - Estilos do Painel do Socorrista
+   ================================================= */
+/* Oculta os botões específicos de visualizar e baixar apenas quando estiver na Home */
+.home-page #visualizar,
+.home-page #download-link {
+  display: none !important;
+}
+
+.fab-hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Garante que o botão de compartilhar permaneça visível */
+.home-page #share-btn {
+  display: flex !important; /* Ou block, dependendo de como o seu layout exibe */
+}
+
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.home-section {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.home-section h2,
+.home-section h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Bloco 1 - Boas-vindas */
+.bloco-boas-vindas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  gap: 1rem;
+  flex-wrap: wrap; /* Garante responsividade caso a tela seja muito estreita */
+}
+
+.bloco-boas-vindas h2 {
+  color: #383838;
+  margin-bottom: 0;
+}
+
+.home-btn-continuar {
+  background-color: #0ea5e9;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.home-btn-continuar:hover:not(:disabled) {
+  background-color: #0284c7;
+}
+
+.home-btn-continuar:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Bloco de Últimas Matérias - Alinhamento Horizontal */
+.bloco-materias .home-cards-flex-container {
+  display: flex;
+  flex-direction: row; /* Garante o alinhamento horizontal */
+  gap: 1rem;
+  flex-wrap: wrap; /* Permite que quebrem de linha de forma responsiva em telas menores */
+}
+
+.bloco-materias .materia-card {
+  flex: 1; /* Distribui o espaço igualmente entre os cards */
+  min-width: 190px; /* Evita que fiquem espremidos demais */
+  height: 100px;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* ==========================================================
+   ESTILOS DO BLOCO DE ÚLTIMAS MATÉRIAS
+   ========================================================== */
+.home-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+/* Grid responsivo para os cards */
+.ultimas-materias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+/* Card individual */
+.materia-recente-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.materia-recente-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+/* Badge da Turma */
+.materia-badge {
+  align-self: flex-start;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Título do Card */
+.materia-recente-titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.4;
+}
+
+/* Contêiner da thumb: define a proporção e esconde o que passar do limite */
+.materia-thumb-wrapper {
+  width: 100%;
+  height: 140px; /* Ajuste a altura desejada para o banner/thumb */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  background-color: #f1f5f9; /* Cor de fundo caso a imagem demore a carregar */
+}
+
+/* A imagem em si: preenche o espaço perfeitamente sem distorcer */
+.materia-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem esticar ou achatar */
+  display: block;
+}
+
+/* Botão de Ação do Card */
+.home-btn-continuar-estudo {
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.home-btn-continuar-estudo:hover {
+  background-color: #1e293b;
+}
+
+/* Estado Vazio */
+.home-empty-text {
+  color: #64748b;
+  font-size: 0.95rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.recado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha no topo caso o subtítulo quebre linha */
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.recados-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Define o espaço de respiro entre cada container de recado separado */
+}
+
+.recados-grid .recado-card {
+  width: 100%;
+  background-color: #fcf6d5;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.recado-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Novo container para agrupar título e subtítulo na esquerda */
+.recado-info-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.recado-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111111;
+  margin: 0;
+}
+
+/* Estilo opcional caso queira dar destaque ao subtítulo (data da prova) */
+.recado-subtitulo {
+  font-size: 0.85rem;
+  color: #ff0b0b;
+  font-weight: 500;
+}
+
+.recado-data {
+  font-size: 0.75rem;
+  color: #64748b;
+  background-color: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.recado-descricao {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 0;
+}
+
+/* Grid da Galeria de Fotos */
+.fotos-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fotos-grid .foto-card-item {
+  margin: 0 auto;
+  flex: 1 1 calc(33.333%);
+  max-width: 250px;
+  height: 180px;
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.fotos-grid .foto-card-item:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+.foto-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos do Overlay / Lightbox (Subtela) */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+#lightbox-caption {
+  color: #f1f5f9;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Bloco 3 e 4 - Alinhamento Vertical (Column) */
+.home-cards-column-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-cards-column-container .home-card-placeholder,
+.home-atalho-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  color: #64748b;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.home-atalho-btn {
+  border-style: solid;
+  border-color: #e2e8f0;
+  cursor: pointer;
+  font-weight: 500;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.home-atalho-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* Bloco 6 - Loja do Socorrista (Alinhamento Horizontal) */
+.loja-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.loja-grid .produto-card {
+  flex: 1 1 calc(25% - 0.75rem); /* Divide em 4 colunas perfeitamente alinhadas */
+  min-width: 180px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  gap: 0.5rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+}
+
+/* 1. Zoom em todo o card ao passar o mouse */
+.produto-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.produto-card:hover {
+  transform: translateY(-4px) scale(1.02); /* Eleva levemente e aplica o zoom */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Dá destaque de profundidade */
+}
+
+/* 2. Hover no texto (título) e no preço */
+.produto-titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  transition: color 0.2s ease; /* Suaviza a transição da cor */
+}
+
+.produto-card:hover .produto-titulo {
+  color: #0284c7; /* Muda para a cor de destaque ao passar o mouse no card */
+}
+
+.produto-preco {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  transition: transform 0.2s ease;
+}
+
+.produto-card:hover .produto-preco {
+  transform: scale(1.05); /* Dá um leve destaque de tamanho no preço */
+}
+
+.produto-foto-placeholder {
+  width: 100%;
+  height: 100px;
+  background-color: #e2e8f0;
+  border-radius: 6px;
+}
+
+/* Container de informações do produto */
+.produto-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente todos os itens filhos (título, preço e botão) */
+  text-align: center; /* Centraliza o texto caso quebre em mais de uma linha */
+  gap: 0.75rem; /* Espaçamento uniforme entre os elementos */
+  padding: 1rem 0 0 0;
+  flex-grow: 1; /* Faz o bloco ocupar o espaço restante do card */
+  justify-content: space-between; /* Empurra o botão para a base se necessário */
+}
+
+/* Ajustes individuais para alinhar perfeitamente */
+.produto-titulo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.produto-preco {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0284c7; /* Cor de destaque para o preço */
+  margin: 0;
+}
+
+/* Estilo do botão "Saber mais" centralizado */
+.home-btn-saber-mais {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ocupa a largura disponível do container centralizado */
+  max-width: 160px; /* Limita para não ficar excessivamente largo */
+  padding: 0.5rem 1rem;
+  background-color: #0f172a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.home-btn-saber-mais:hover {
+  background-color: #334155;
+}
+
+/* Container fixo para a foto do produto */
+.produto-foto-container {
+  width: 100%;
+  height: 160px; /* Ajuste esta altura conforme o tamanho ideal para o seu layout */
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  overflow: hidden; /* Garante que nada vaze para fora do container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagem ajustada para preencher o espaço de forma uniforme */
+.produto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Corta proporcionalmente se necessário para preencher o bloco */
+  transition: transform 0.2s ease;
+}
+
+/* Efeito de zoom suave ao passar o mouse (opcional) */
+.produto-card:hover .produto-img {
+  transform: scale(1.05);
+}
+
+/* Responsividade Básica para Telas Menores */
+@media (max-width: 768px) {
+  .home-cards-flex-container .home-card-placeholder,
+  .home-fotos-grid-container .home-card-placeholder,
+  .loja-grid .produto-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* Garante que em telas menores (tablets e celulares) eles fiquem empilhados para não apertar */
+@media (max-width: 768px) {
+  .ultimas-materias-grid {
+    grid-template-columns: 1fr;
+  }
+}

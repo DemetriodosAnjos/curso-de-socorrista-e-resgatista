@@ -42,151 +42,8 @@ body {
 }
 
 /* ==========================================================
-     2. SIDEBAR E NAVEGAÇÃO
-     ========================================================== */
-.sidebar {
-  width: var(--sidebar-width);
-  height: 100%;
-  background-color: #1e293b;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 100;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-/* Estrutura dos Blocos Verticais */
-.sidebar-block {
-  width: 100%;
-  padding: 1.25rem;
-}
-
-/* BLOCO 1: Logo */
-.sidebar-logo-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-logo {
-  max-width: 100px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* BLOCO 2: Lista de Matérias */
-.sidebar-content-block {
-  flex: 1;
-  overflow-y: auto;
-  padding-top: 1rem;
-}
-
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.sidebar-header h2 {
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.close-sidebar-btn {
-  display: none; /* Visível apenas no mobile */
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 1.75rem;
-  cursor: pointer;
-}
-
-/* Estilização Única dos Itens do Menu (Consolidado) */
-#menu-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-#menu-list li a,
-#menu-list li button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-left 0.2s ease;
-}
-
-#menu-list li a:hover,
-#menu-list li button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Estado Ativo/Selecionado (Unificado) */
-#menu-list li.active a,
-#menu-list li.active button,
-#menu-list li a.active,
-#menu-list li button.active {
-  background-color: var(--primary-color-light, #0284c7);
-  color: #ffffff;
-  font-weight: 700;
-  border-left: 4px solid #ffffff;
-}
-
-/* BLOCO 3: Rodapé da Sidebar */
-.sidebar-footer-block {
-  padding-bottom: 1.5rem;
-  text-align: center;
-}
-
-.sidebar-divider {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  margin-bottom: 1rem;
-}
-
-.sidebar-version {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-  display: block;
-}
-
-/* Overlay para Mobile */
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 90;
-}
-
-/* ==========================================================
-     3. ÁREA PRINCIPAL (HEADER + CONTEÚDO)
-     ========================================================== */
+         3. ÁREA PRINCIPAL (HEADER + CONTEÚDO)
+         ========================================================== */
 .main-wrapper {
   flex: 1;
   display: flex;
@@ -301,8 +158,8 @@ body {
 }
 
 /* ==========================================================
-   ESTILIZAÇÃO DOS BOTÕES DE SIMULADO (INJETADOS VIA JS)
-   ========================================================== */
+       ESTILIZAÇÃO DOS BOTÕES DE SIMULADO (INJETADOS VIA JS)
+       ========================================================== */
 
 .btn-simulado-container {
   display: flex;
@@ -346,8 +203,8 @@ a.btn-simulado:hover,
 }
 
 /* ==========================================================
-     4. RODAPÉ DE CRÉDITOS (FOOTER)
-     ========================================================== */
+         4. RODAPÉ DE CRÉDITOS (FOOTER)
+         ========================================================== */
 .footer-credits {
   width: 100%;
   margin-top: auto;
@@ -398,8 +255,8 @@ a.btn-simulado:hover,
 }
 
 /* ==========================================================
-     5. PAINEL FLUTUANTE DE AÇÕES (FABs)
-     ========================================================== */
+         5. PAINEL FLUTUANTE DE AÇÕES (FABs)
+         ========================================================== */
 .fab-container {
   position: fixed;
   bottom: 40px;
@@ -454,8 +311,8 @@ a.btn-simulado:hover,
 }
 
 /* ==========================================================
-     6. COMPONENTES UTILITÁRIOS (PDF OVERLAY & SPINNER)
-     ========================================================== */
+         6. COMPONENTES UTILITÁRIOS (PDF OVERLAY & SPINNER)
+         ========================================================== */
 .pdf-loading-overlay {
   position: fixed;
   top: 0;
@@ -503,8 +360,8 @@ a.btn-simulado:hover,
 }
 
 /* ==========================================================
-     7. RESPONSIVIDADE (MOBILE)
-     ========================================================== */
+         7. RESPONSIVIDADE (MOBILE)
+         ========================================================== */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
