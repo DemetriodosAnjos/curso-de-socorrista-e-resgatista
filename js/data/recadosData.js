@@ -26,7 +26,7 @@ export const recadosData = {
       subtitulo: "Escala de Gasglow",
       descricao:
         "O simulado <strong>Escala de Gasglow</strong> já está liberado na aba de simulados.",
-      dataHora: "2026-06-04T15:30:00Z",
+      dataHora: "2026-08-06T14:10:00Z",
     },
   ],
 };
